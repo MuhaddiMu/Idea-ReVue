@@ -5,9 +5,25 @@ import router from "./router";
 import store from "./store";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
+import vueHeadful from 'vue-headful';
 import "./stylus/main.styl";
+import firebase from './firebase'
 
+Vue.component('vue-headful', vueHeadful);
 Vue.use(Vuetify);
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if (requiresAuth && !currentUser) {
+   next('/Auth');
+  } else if (requiresAuth && currentUser) {
+   next();
+  } else {
+   next();
+  }
+  });
+
 
 Vue.config.productionTip = false;
 
