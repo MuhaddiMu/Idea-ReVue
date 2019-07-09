@@ -23,7 +23,7 @@ export default {
    methods: {
     setUser: function() {
       this.$store.dispatch('setUser');
-    }
+    },
   },
     created() {
     // when the app is created run the set user method

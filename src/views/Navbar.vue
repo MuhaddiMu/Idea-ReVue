@@ -1,5 +1,6 @@
 <template>
 <nav v-show="Navbar">
+  <v-snackbar v-model="LogSuccess" top>Success! Welcome to Dashboard<v-btn color="pink" flat @click="Snackbar = false" > Close</v-btn></v-snackbar>
   <v-toolbar app>
     <v-toolbar-side-icon class="grey--text" @click="Sidebar = !Sidebar"></v-toolbar-side-icon>
     <v-toolbar-title class="grey--text text-uppercase">
@@ -23,8 +24,7 @@
         <v-flex mt-3>
           <v-avatar size="100">
             <img
-              src="https://www.muhaddis.info/wp-content/uploads/2016/08/Favicon-1.png"
-            />
+              src="https://www.muhaddis.info/wp-content/uploads/2016/08/Favicon-1.png"/>
           </v-avatar>
           <p class="black--text subheading mt-1">Muhammad Muhaddis</p>
         </v-flex>
@@ -40,18 +40,19 @@
         </v-list-tile>
       </v-list>
   </v-navigation-drawer>
-
 </nav>
 </template>
 
 <script>
 import firebase from '../firebase';
+import EventBus from '../EventBus';
 export default {
 
 	data(){
 		return {
       Sidebar: false,
       Navbar: false,
+      LogSuccess: false,
 		}
   },
   methods: {
@@ -61,6 +62,11 @@ export default {
         this.$router.replace('/Auth');
       });
     },
+    ShowLoggedInMessage(){
+      EventBus.$on("LoggedInSuccess", function () {
+        //Show Snackbar
+      }
+    )}
   },
   computed: {
     user() {
@@ -68,11 +74,13 @@ export default {
     }
   },
 
-  created(){
+	created(){
+    this.ShowLoggedInMessage();
+	
     if(this.$store.getters.getUser){
       this.Navbar = true;
     }
-  }
+  },
 }
 </script>
 

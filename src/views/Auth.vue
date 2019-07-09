@@ -1,6 +1,7 @@
 <template>
 	<v-container>
 		<h1 class="text-xs-center display-3 blue--text Title">Idea Re-Vue</h1>
+		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}<v-btn color="pink" flat @click="Snackbar = false" > Close</v-btn></v-snackbar>
 		<v-layout align-center justify-center row wrap>
 			<v-flex xs12 md6>
 				<v-card v-if="Login" justify-center color="grey lighten-4">
@@ -55,9 +56,12 @@
 <script>
 import firebase from '../firebase';
 import router from '../router'
+import EventBus from '../EventBus'
 export default {
 	data(){
 		return {
+			Snackbar: false,
+			SnackbarMsg: '', 
 			LoginEmail:	'',
 			LoginPassword:	'',
 			RegName:	'',
@@ -81,20 +85,29 @@ export default {
 			this.$router.replace('/')
 				
 				}, 
-			error => { console.log(error.message); 
+			error => { 
+				this.SnackbarMsg = error.message; 
+				this.Snackbar = true
 			});
 		},
 
 		LogIn(){
 			const AUTH  = firebase.firebase.auth();
 			AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then( user => {
+			EventBus.$emit("LoggedInSuccess")
 			this.$router.replace('/')
-
-				}, 
-			error => { console.log(error.message); 
+			},  error => { 
+				this.SnackbarMsg = error.message; 
+				this.Snackbar = true
 			});
 		},
 	},
+
+	created(){
+		if(this.$store.getters.getUser){
+			this.$router.replace('/')
+    	}
+	}
 }
 </script>
 <style>
