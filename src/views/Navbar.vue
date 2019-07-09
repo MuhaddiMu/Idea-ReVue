@@ -1,5 +1,5 @@
 <template>
-<nav>
+<nav v-show="Navbar">
   <v-toolbar app>
     <v-toolbar-side-icon class="grey--text" @click="Sidebar = !Sidebar"></v-toolbar-side-icon>
     <v-toolbar-title class="grey--text text-uppercase">
@@ -51,6 +51,7 @@ export default {
 	data(){
 		return {
       Sidebar: false,
+      Navbar: false,
 		}
   },
   methods: {
@@ -66,6 +67,12 @@ export default {
       return this.$store.getters.getUser;
     }
   },
+
+  created(){
+    if(this.$store.getters.getUser){
+      this.Navbar = true;
+    }
+  }
 }
 </script>
 
