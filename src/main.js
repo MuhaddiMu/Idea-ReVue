@@ -16,19 +16,20 @@ router.beforeEach((to, from, next) => {
   const currentUser = firebase.firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if (requiresAuth && !currentUser) {
-   next('/Auth');
+    next('/Auth'); 
   } else if (requiresAuth && currentUser) {
-   next();
+    next();
   } else {
-   next();
+    next();
   }
-  });
+});
 
 
 Vue.config.productionTip = false;
-
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+  firebase.firebase.auth().onAuthStateChanged(function (user) {
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount("#app");
+});

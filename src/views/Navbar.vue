@@ -13,12 +13,12 @@
       </template><span>Show Love By Tapping</span></v-tooltip>
 
 
-      <v-btn flat>Link Two</v-btn>
+      <v-btn flat>LEADER</v-btn>
       <v-btn @click="LogOut" flat>Log Out<v-icon right>exit_to_app</v-icon></v-btn>
     </v-toolbar-items>
   </v-toolbar>
 
-    <v-navigation-drawer  v-model="Sidebar" app>
+    <v-navigation-drawer v-model="Sidebar" app>
       <v-layout align-center justify-center column text-xs-center>
         <v-flex mt-3>
           <v-avatar size="100">
@@ -50,7 +50,7 @@ export default {
 
 	data(){
 		return {
-			Sidebar: false,
+      Sidebar: false,
 		}
   },
   methods: {
@@ -59,9 +59,13 @@ export default {
       AUTH.signOut().then(() => {
         this.$router.replace('/Auth');
       });
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.getters.getUser;
     }
   },
-
 }
 </script>
 

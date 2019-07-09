@@ -1,5 +1,6 @@
 <template>
 	<v-container>
+		<h1 class="text-xs-center display-3 blue--text Title">Idea Re-Vue</h1>
 		<v-layout align-center justify-center row wrap>
 			<v-flex xs12 md6>
 				<v-card v-if="Login" justify-center color="grey lighten-4">
@@ -77,7 +78,7 @@ export default {
 		Register(){
 			const AUTH  = firebase.firebase.auth();
 			AUTH.createUserWithEmailAndPassword(this.RegEmail, this.RegPass).then( user => {
-			this.$router.push('/')
+			this.$router.replace('/')
 				
 				}, 
 			error => { console.log(error.message); 
@@ -87,26 +88,17 @@ export default {
 		LogIn(){
 			const AUTH  = firebase.firebase.auth();
 			AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then( user => {
-			this.$router.push('/')
+			this.$router.replace('/')
 
 				}, 
 			error => { console.log(error.message); 
 			});
 		},
-	}, 
-
-	beforeRouteEnter(to, from, next){
-		firebase.firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-			next('/')
-			// User is signed in.
-		} else {
-			next('/Auth')
-		}
-		});
-	}
+	},
 }
 </script>
 <style>
-
+.Title {
+	text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+}
 </style>
