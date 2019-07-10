@@ -1,6 +1,5 @@
 <template>
 <nav v-show="Navbar">
-  <v-snackbar v-model="LogSuccess" top>Success! Welcome to Dashboard<v-btn color="pink" flat @click="Snackbar = false" > Close</v-btn></v-snackbar>
   <v-toolbar app>
     <v-toolbar-side-icon class="grey--text" @click="Sidebar = !Sidebar"></v-toolbar-side-icon>
     <v-toolbar-title class="grey--text text-uppercase">
@@ -14,7 +13,7 @@
       </template><span>Show Love By Tapping</span></v-tooltip>
 
 
-      <v-btn flat>LEADER</v-btn>
+      <v-btn flat v-if="LogSuccess">LEADER</v-btn>
       <v-btn @click="LogOut" flat>Log Out<v-icon right>exit_to_app</v-icon></v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -40,12 +39,13 @@
         </v-list-tile>
       </v-list>
   </v-navigation-drawer>
+  <v-snackbar v-model="LogSuccess" top>Success! Welcome to Dashboard<v-btn color="pink" flat @click="LogSuccess = false" > Close</v-btn></v-snackbar>
 </nav>
 </template>
 
 <script>
 import firebase from '../firebase';
-import EventBus from '../EventBus';
+
 export default {
 
 	data(){
@@ -62,11 +62,7 @@ export default {
         this.$router.replace('/Auth');
       });
     },
-    ShowLoggedInMessage(){
-      EventBus.$on("LoggedInSuccess", function () {
-        //Show Snackbar
-      }
-    )}
+
   },
   computed: {
     user() {
@@ -74,13 +70,25 @@ export default {
     }
   },
 
-	created(){
-    this.ShowLoggedInMessage();
-	
+	created(){  
+
+    this.$eventBus.$on('Sux', () => {
+        this.LogSuccess = true
+        console.log(this.LogSuccess)
+    })
+  
+
     if(this.$store.getters.getUser){
       this.Navbar = true;
     }
+
+    /* if(this.$store.getters.LogSuccess){
+      this.LogSuccess = true;
+      
+    } */
+
   },
+
 }
 </script>
 

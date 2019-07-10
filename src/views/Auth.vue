@@ -56,7 +56,7 @@
 <script>
 import firebase from '../firebase';
 import router from '../router'
-import EventBus from '../EventBus'
+
 export default {
 	data(){
 		return {
@@ -94,8 +94,8 @@ export default {
 		LogIn(){
 			const AUTH  = firebase.firebase.auth();
 			AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then( user => {
-			EventBus.$emit("LoggedInSuccess")
 			this.$router.replace('/')
+			this.$eventBus.$emit('Sux');
 			},  error => { 
 				this.SnackbarMsg = error.message; 
 				this.Snackbar = true

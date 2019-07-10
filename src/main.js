@@ -9,6 +9,9 @@ import vueHeadful from 'vue-headful';
 import "./stylus/main.styl";
 import firebase from './firebase'
 
+Vue.prototype.$eventBus = new Vue();
+
+
 Vue.component('vue-headful', vueHeadful);
 Vue.use(Vuetify);
 
