@@ -70,10 +70,11 @@ export default {
     }
   },
 
-	created(){  
+created(){  
 
     this.$eventBus.$on('Sux', () => {
         this.LogSuccess = true
+      alert(this.LogSuccess)
         console.log(this.LogSuccess)
     })
   
