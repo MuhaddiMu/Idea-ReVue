@@ -19,7 +19,7 @@
 
 
 					<v-flex align-self-center xs6 md8 offset-sm4>
-						<v-btn @click="LogIn" flat>Log In</v-btn>
+						<v-btn @click="LogIn" flat :loading="Loading">Log In</v-btn>
 						<v-btn @click="Login = !Login" flat>Register</v-btn>
 					</v-flex>
 				</v-card>
@@ -45,7 +45,8 @@
 
 					<v-flex align-self-center xs6 md8 offset-sm4>
 						<v-btn @click="Login = !Login" flat>Log In</v-btn>
-						<v-btn @click="Register" flat>Register</v-btn>
+
+						<v-btn @click="Register" flat :loading="Loading">Register</v-btn>
 					</v-flex>
 				</v-card>
 			</v-flex>
@@ -61,7 +62,8 @@ export default {
 	data(){
 		return {
 			Snackbar: false,
-			SnackbarMsg: '', 
+			SnackbarMsg: '',
+			Loading: false,
 			LoginEmail:	'',
 			LoginPassword:	'',
 			RegName:	'',
@@ -80,24 +82,30 @@ export default {
 
 	methods: {
 		Register(){
+			this.Loading = true
 			const AUTH  = firebase.firebase.auth();
 			AUTH.createUserWithEmailAndPassword(this.RegEmail, this.RegPass).then( user => {
+			this.Loading = false
 			this.$router.replace('/')
 				
 				}, 
 			error => { 
 				this.SnackbarMsg = error.message; 
+				this.Loading = false
 				this.Snackbar = true
 			});
 		},
 
 		LogIn(){
+			this.Loading = true
 			const AUTH  = firebase.firebase.auth();
 			AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then( user => {
 			this.$router.replace('/')
 			this.$eventBus.$emit('Sux');
+			this.Loading = false
 			},  error => { 
 				this.SnackbarMsg = error.message; 
+				this.Loading = false
 				this.Snackbar = true
 			});
 		},

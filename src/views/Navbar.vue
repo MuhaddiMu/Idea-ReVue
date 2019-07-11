@@ -70,7 +70,7 @@ export default {
     }
   },
 
-created(){  
+mounted(){  
 
     this.$eventBus.$on('Sux', () => {
         this.LogSuccess = true
