@@ -62,7 +62,6 @@ export default {
         this.$router.replace('/Auth');
       });
     },
-
   },
   computed: {
     user() {
@@ -70,24 +69,13 @@ export default {
     }
   },
 
-mounted(){  
-
-    this.$eventBus.$on('Sux', () => {
-        this.LogSuccess = true
-      alert(this.LogSuccess)
-        console.log(this.LogSuccess)
-    })
-  
-
+created(){
     if(this.$store.getters.getUser){
       this.Navbar = true;
     }
-
-    /* if(this.$store.getters.LogSuccess){
-      this.LogSuccess = true;
-      
-    } */
-
+    setTimeout(() => {
+      this.LogSuccess = true
+    }, 2000);
   },
 
 }
