@@ -9,11 +9,11 @@
 
     <v-toolbar-items class="hidden-sm-and-down">
 	  <v-tooltip left><template v-slot:activator="{ on }">
-		 <v-btn v-on="on" fab flat><v-icon large color="indigo">favorite</v-icon></v-btn>
+		 <v-btn v-on="on" fab flat><v-icon @click="LoveUpdate" large color="indigo">favorite</v-icon></v-btn>
       </template><span>Show Love By Tapping</span></v-tooltip>
 
 
-      <v-btn flat v-if="LogSuccess">LEADER</v-btn>
+      <v-btn flat>{{LoveCount}}</v-btn>
       <v-btn @click="LogOut" flat>Log Out<v-icon right>exit_to_app</v-icon></v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -45,7 +45,7 @@
 
 <script>
 import firebase from '../firebase';
-
+import store from '../store';
 export default {
 
 	data(){
@@ -62,14 +62,27 @@ export default {
         this.$router.replace('/Auth');
       });
     },
+    LoveUpdate(){
+    
+    /*   firebase.firebase.firestore().collection("Love").doc("Counter").set({
+      })
+      .then(function() {
+          console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+          console.error("Error writing document: ", error);
+      }); */
+    }
   },
   computed: {
-    user() {
-      return this.$store.getters.getUser;
+
+    LoveCount(){
+      return store.state.LoveCount;
     }
   },
 
 created(){
+
     if(this.$store.getters.getUser){
       this.Navbar = true;
     }

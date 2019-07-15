@@ -7,27 +7,44 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
-    LogSuccess: true
+    LoveCount: null,
   },
+
+
   getters: {
     getUser: state => {
       return state.user;
     },
-    LogSuccess: state => {
-        return state.LogSuccess;
-    },
+
+    GetLoveCount: state => {
+      return state.LoveCount;
+    }
   },
+
+
   mutations: {
     setUser: state => {
       state.user = firebase.firebase.auth().currentUser;
     },
-    UpdateLogSuccess: state => {
-      state.LogSuccess = false;
+
+    SetLoveCount: state => {
+      var LoveCount = firebase.firebase.firestore().collection("Love").doc("Counter");
+      LoveCount.get().then(function(doc) {
+        if (doc.exists) {
+          var Data = doc.data();
+          state.LoveCount = Data.Count;
+        }
+      });
     }
   },
+
+
   actions: {
     setUser: context => {
       context.commit('setUser');
-    }
+    },
+    SetLoveCount: context => {
+      context.commit('SetLoveCount');
+    },
   }
 });
