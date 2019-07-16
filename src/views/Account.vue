@@ -61,6 +61,9 @@ export default {
     UserEmail(){
       return this.$store.state.user.email;
     }
+  },
+  created(){
+    this.$store.dispatch('UserName');
   }
 }
 </script>

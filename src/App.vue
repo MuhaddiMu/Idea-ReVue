@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navbar></Navbar>
+    <Navbar v-if="ShowNavbar"></Navbar>
     <v-content class="mx-4 mb-4" grey lighten-4>
       <router-view></router-view>
     </v-content>
@@ -17,19 +17,26 @@ export default {
   },
   data() {
     return {
-      ShowNav: false,
     };
   },
    methods: {
     setUser: function() {
       this.$store.dispatch('SetLoveCount');
       this.$store.dispatch('setUser');
-      this.$store.dispatch('UserName');
     },
   },
     created() {
     this.setUser();
-  }
+  },
+  computed: {
+    ShowNavbar(){
+      if(this.$store.getters.getUser){
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
 };
 </script>
 

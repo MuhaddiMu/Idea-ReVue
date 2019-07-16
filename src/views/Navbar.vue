@@ -100,5 +100,6 @@ created(){
       this.LogSuccess = true
     }, 2000);
   },
+
 }
 </script>
