@@ -9,11 +9,9 @@
 
     <v-toolbar-items class="hidden-sm-and-down">
 	  <v-tooltip left><template v-slot:activator="{ on }">
-		 <v-btn v-on="on" fab flat><v-icon @click="LoveUpdate" large color="indigo">favorite</v-icon></v-btn>
+		 <v-btn left class="ml-5" v-on="on" fab flat><v-icon @click="LoveUpdate" large color="pink">favorite</v-icon></v-btn>
       </template><span>Show Love By Tapping</span></v-tooltip>
-
-
-      <v-btn flat>{{LoveCount}}</v-btn>
+      <v-btn :ripple="false" class="TotalCount" font-weight-bold left flat><kbd class="body-2"><b>{{LoveCount}}</b> <v-icon class="ml-1" small>favorite</v-icon></kbd></v-btn>
       <v-btn @click="LogOut" flat>Log Out<v-icon right>exit_to_app</v-icon></v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -63,21 +61,20 @@ export default {
       });
     },
     LoveUpdate(){
-    
-    /*   firebase.firebase.firestore().collection("Love").doc("Counter").set({
-      })
-      .then(function() {
-          console.log("Document successfully written!");
-      })
-      .catch(function(error) {
+
+    firebase.firebase.firestore().collection("Love").doc("Counter").set({
+        Count: store.state.LoveCount + 1,
+      }).then(function() {
+          store.dispatch('SetLoveCount');
+      }).catch(function(error) {
           console.error("Error writing document: ", error);
-      }); */
+      });
     }
   },
   computed: {
 
     LoveCount(){
-      return store.state.LoveCount;
+      return this.$store.state.LoveCount;
     }
   },
 
@@ -94,6 +91,6 @@ created(){
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
