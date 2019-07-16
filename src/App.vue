@@ -24,6 +24,7 @@ export default {
     setUser: function() {
       this.$store.dispatch('SetLoveCount');
       this.$store.dispatch('setUser');
+      this.$store.dispatch('UserName');
     },
   },
     created() {

@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     LoveCount: null,
+    UserName: null,
   },
 
   getters: {
@@ -18,6 +19,10 @@ export default new Vuex.Store({
     GetLoveCount: state => {
       return state.LoveCount;
     },
+
+    GetUserName: state => {
+      return state.UserName;
+    }
     
   },
 
@@ -34,7 +39,21 @@ export default new Vuex.Store({
           state.LoveCount = Data.Count;
         }
       });
-    }
+    },
+
+    UserName: state => {
+      var docRef = firebase.firebase.firestore().collection("Users").doc(state.user.uid);
+      docRef.get().then(function(doc) {
+      if (doc.exists) {
+          state.UserName = doc.data().Name;
+      } else {
+          console.log("No such document!");
+      }
+      }).catch(function(error) {
+          console.log("Error getting document:", error);
+      });
+      }
+
   },
 
 
@@ -42,8 +61,13 @@ export default new Vuex.Store({
     setUser: context => {
       context.commit('setUser');
     },
+
     SetLoveCount: context => {
       context.commit('SetLoveCount');
+    },
+
+    UserName: context => {
+      context.commit('UserName');
     }
   }
 });

@@ -9,10 +9,10 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field prepend-icon="person" label="Full Name" required></v-text-field>
+                <v-text-field v-model="UserName" prepend-icon="person" label="Full Name" required></v-text-field>
               </v-flex>
 			  <v-flex xs12>
-                <v-text-field prepend-icon="email" label="Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+                <v-text-field v-model="UserEmail" prepend-icon="email" label="Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field prepend-icon="lock" label="Password" required v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import firebase from '../firebase'
 export default {
 	data(){
 		return{
@@ -49,7 +50,16 @@ export default {
   methods: {
     ShowModal(){
       this.dialog = true;
-      
+    }
+
+  },
+  computed: {
+    UserName(){
+      return this.$store.state.UserName;
+    },
+
+    UserEmail(){
+      return this.$store.state.user.email;
     }
   }
 }
