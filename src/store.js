@@ -10,7 +10,6 @@ export default new Vuex.Store({
     LoveCount: null,
   },
 
-
   getters: {
     getUser: state => {
       return state.user;
@@ -18,9 +17,9 @@ export default new Vuex.Store({
 
     GetLoveCount: state => {
       return state.LoveCount;
-    }
+    },
+    
   },
-
 
   mutations: {
     setUser: state => {
@@ -45,6 +44,6 @@ export default new Vuex.Store({
     },
     SetLoveCount: context => {
       context.commit('SetLoveCount');
-    },
+    }
   }
 });

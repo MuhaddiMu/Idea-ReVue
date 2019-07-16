@@ -20,10 +20,10 @@
       <v-layout align-center justify-center column text-xs-center>
         <v-flex mt-3>
           <v-avatar size="100">
-            <img
-              src="https://www.muhaddis.info/wp-content/uploads/2016/08/Favicon-1.png"/>
+            <v-gravatar :email="Email" :size="400"/>
           </v-avatar>
-          <p class="black--text subheading mt-1">Username Goes Here</p>
+          <p class="black--text subheading mt-1">:Username</p>
+          
         </v-flex>
       </v-layout>
       <v-list>
@@ -59,7 +59,8 @@ export default {
 		return {
       Sidebar: false,
       Navbar: false,
-      LogSuccess: false,
+      LogSuccess: false, 
+      Email: this.$store.getters.getUser.email,
 		}
   },
   methods: {
@@ -88,7 +89,7 @@ export default {
 
     LoveCount(){
       return this.$store.state.LoveCount;
-    }
+    },
   },
 
 created(){
@@ -98,6 +99,7 @@ created(){
     setTimeout(() => {
       this.LogSuccess = true
     }, 2000);
+  
   },
 }
 </script>

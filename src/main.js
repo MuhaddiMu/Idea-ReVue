@@ -8,6 +8,9 @@ import "vuetify/dist/vuetify.min.css";
 import vueHeadful from 'vue-headful';
 import "./stylus/main.styl";
 import firebase from './firebase'
+import Gravatar from 'vue-gravatar';
+ 
+Vue.component('v-gravatar', Gravatar);
 
 Vue.prototype.$eventBus = new Vue();
 
