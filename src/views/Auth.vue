@@ -5,49 +5,53 @@
 		<v-layout align-center justify-center row wrap>
 			<v-flex xs12 md6>
 				<v-card v-if="Login" justify-center color="grey lighten-4">
-					<vue-headful title="Account Login | Idea Re-Vue"/>
+					<v-form ref="form">
+						<vue-headful title="Account Login | Idea Re-Vue"/>
 
-					<v-card-text class="headline text-xs-center px-0">Account Login</v-card-text>
+						<v-card-text class="headline text-xs-center px-0">Account Login</v-card-text>
 
-					<v-flex align-self-center xs6 md8 offset-sm2>
-						<v-text-field v-model="LoginEmail" key="LoginEmail" label="Email" prepend-icon="email" :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
-					</v-flex>
+						<v-flex align-self-center xs6 md8 offset-sm2>
+							<v-text-field v-model="LoginEmail" key="LoginEmail" label="Email" prepend-icon="email" :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+						</v-flex>
 
-					<v-flex align-self-center xs6 md8 offset-sm2>
-						<v-text-field v-model="LoginPassword" key="LoginPassword" prepend-icon="lock" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
-					</v-flex>
+						<v-flex align-self-center xs6 md8 offset-sm2>
+							<v-text-field v-model="LoginPassword" key="LoginPassword" prepend-icon="lock" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
+						</v-flex>
 
 
-					<v-flex align-self-center xs6 md8 offset-sm4>
-						<v-btn @click="LogIn" flat :loading="Loading">Log In</v-btn>
-						<v-btn @click="Login = !Login" flat>Register</v-btn>
-					</v-flex>
+						<v-flex align-self-center xs6 md8 offset-sm4>
+							<v-btn @click="LogIn" flat :loading="Loading">Log In</v-btn>
+							<v-btn @click="Login = !Login" flat>Register</v-btn>
+						</v-flex>
+					</v-form>
 				</v-card>
 
 
 				<v-card v-else justify-center color="grey lighten-4">
-					<vue-headful title="Account Registeration | Idea Re-Vue"/>
+					<v-form ref="form">
+						<vue-headful title="Account Registeration | Idea Re-Vue"/>
 
-					<v-card-text class="headline text-xs-center px-0">Account Registeration</v-card-text>
+						<v-card-text class="headline text-xs-center px-0">Account Registeration</v-card-text>
 
-					<v-flex align-self-center xs6 md8 offset-sm2>
-						<v-text-field v-model="RegName" key="RegName" label="Full Name" prepend-icon="person" ></v-text-field>
-					</v-flex>
+						<v-flex align-self-center xs6 md8 offset-sm2>
+							<v-text-field v-model="RegName" key="RegName" label="Full Name" prepend-icon="person" :rules="[rules.NameReq]"></v-text-field>
+						</v-flex>
 
-					<v-flex align-self-center xs6 md8 offset-sm2>
-						<v-text-field v-model="RegEmail" key="RegEmail" label="Email" prepend-icon="email" :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
-					</v-flex>
+						<v-flex align-self-center xs6 md8 offset-sm2>
+							<v-text-field v-model="RegEmail" key="RegEmail" label="Email" prepend-icon="email" :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+						</v-flex>
 
-					<v-flex align-self-center xs6 md8 offset-sm2>
-						<v-text-field key="RegPass" prepend-icon="lock" v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
-					</v-flex>
+						<v-flex align-self-center xs6 md8 offset-sm2>
+							<v-text-field key="RegPass" prepend-icon="lock" v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
+						</v-flex>
 
 
-					<v-flex align-self-center xs6 md8 offset-sm4>
-						<v-btn @click="Login = !Login" flat>Log In</v-btn>
+						<v-flex align-self-center xs6 md8 offset-sm4>
+							<v-btn @click="Login = !Login" flat>Log In</v-btn>
 
-						<v-btn @click="Register" flat :loading="Loading">Register</v-btn>
-					</v-flex>
+							<v-btn @click="Register" flat :loading="Loading">Register</v-btn>
+						</v-flex>
+					</v-form>
 				</v-card>
 			</v-flex>
 		</v-layout>
@@ -74,7 +78,8 @@ export default {
 				PassRequired: value => !!value || 'Required.',
 				PassMin: v => v.length >= 8 || 'Min 8 characters',
 				EmailRequired: v => !!v || 'E-mail is required',
-				EmailValid: v => /.+@.+/.test(v) || 'E-mail must be valid'
+				EmailValid: v => /.+@.+/.test(v) || 'E-mail must be valid',
+				NameReq: value => !!value || 'Required.',
 			},
 			Login: true,
 		}
@@ -82,37 +87,41 @@ export default {
 
 	methods: {
 		Register(){
-			this.Loading = true
-			const AUTH  = firebase.firebase.auth();
-			AUTH.createUserWithEmailAndPassword(this.RegEmail, this.RegPass).then( user => {
-				firebase.firebase.firestore().collection("Users").doc(user.user.uid).set({
-						Name: this.RegName,
-					}).then(() => {
+			if(this.$refs.form.validate()) {
+				this.Loading = true
+				const AUTH  = firebase.firebase.auth();
+				AUTH.createUserWithEmailAndPassword(this.RegEmail, this.RegPass).then( user => {
+					firebase.firebase.firestore().collection("Users").doc(user.user.uid).set({
+							Name: this.RegName,
+						}).then(() => {
+							this.Loading = false
+							this.$router.replace('/')
+						});
 						this.Loading = false
 						this.$router.replace('/')
-					});
+					}, 
+				error => { 
+					this.SnackbarMsg = error.message; 
 					this.Loading = false
-					this.$router.replace('/')
-				}, 
-			error => { 
-				this.SnackbarMsg = error.message; 
-				this.Loading = false
-				this.Snackbar = true
-			});
+					this.Snackbar = true
+				});
+			}
 		},
 
 		LogIn(){
-			this.Loading = true
-			const AUTH  = firebase.firebase.auth();
-			AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then( user => {
-			this.$router.replace('/')
-			this.$eventBus.$emit('Sux');
-			this.Loading = false
-			},  error => { 
-				this.SnackbarMsg = error.message; 
+			if(this.$refs.form.validate()) {
+				this.Loading = true
+				const AUTH  = firebase.firebase.auth();
+				AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then( user => {
+				this.$router.replace('/')
+				this.$eventBus.$emit('Sux');
 				this.Loading = false
-				this.Snackbar = true
-			});
+				},  error => { 
+					this.SnackbarMsg = error.message; 
+					this.Loading = false
+					this.Snackbar = true
+				});
+			}
 		},
 	},
 
