@@ -22,7 +22,7 @@
           <v-avatar size="100">
             <v-gravatar :email="Email" :size="400"/>
           </v-avatar>
-          <p class="black--text subheading mt-1">:Username</p>
+          <p class="black--text subheading mt-1">{{UserName}}</p>
           
         </v-flex>
       </v-layout>
@@ -90,9 +90,16 @@ export default {
     LoveCount(){
       return this.$store.state.LoveCount;
     },
+    
+    UserName(){
+      return this.$store.getters.GetUserName;
+    },
+
+
   },
 
 created(){
+
     if(this.$store.getters.getUser){
       this.Navbar = true;
     }
@@ -100,6 +107,7 @@ created(){
       this.LogSuccess = true
     }, 2000);
   },
+  
 
 }
 </script>

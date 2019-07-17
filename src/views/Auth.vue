@@ -85,9 +85,14 @@ export default {
 			this.Loading = true
 			const AUTH  = firebase.firebase.auth();
 			AUTH.createUserWithEmailAndPassword(this.RegEmail, this.RegPass).then( user => {
-			this.Loading = false
-			this.$router.replace('/')
-				
+				firebase.firebase.firestore().collection("Users").doc(user.user.uid).set({
+						Name: this.RegName,
+					}).then(() => {
+						this.Loading = false
+						this.$router.replace('/')
+					});
+					this.Loading = false
+					this.$router.replace('/')
 				}, 
 			error => { 
 				this.SnackbarMsg = error.message; 
