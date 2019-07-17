@@ -15,7 +15,7 @@
 						</v-flex>
 
 						<v-flex align-self-center xs6 md8 offset-sm2>
-							<v-text-field v-model="LoginPassword" key="LoginPassword" prepend-icon="lock" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
+							<v-text-field @keyup.enter="LogIn()" v-model="LoginPassword" key="LoginPassword" prepend-icon="lock" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
 						</v-flex>
 
 
@@ -42,7 +42,7 @@
 						</v-flex>
 
 						<v-flex align-self-center xs6 md8 offset-sm2>
-							<v-text-field key="RegPass" prepend-icon="lock" v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
+							<v-text-field @keyup.enter="Register()" key="RegPass" prepend-icon="lock" v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" label="Password" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
 						</v-flex>
 
 
