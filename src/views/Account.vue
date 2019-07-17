@@ -1,44 +1,73 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-card>
-        <v-card-title>
-          <span class="headline">User Profile</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container grid-list-md>
-            <v-layout wrap>
-              <v-flex xs12>
-                <v-text-field v-model="UserName" prepend-icon="person" label="Full Name" required></v-text-field>
-              </v-flex>
-			  <v-flex xs12>
-                <v-text-field v-model="UserEmail" prepend-icon="email" label="Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field prepend-icon="lock" label="Password" required v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click="dialog = false">Save</v-btn>
-        </v-card-actions>
+      <v-card v-if="!PassDialogue">
+        <v-form ref="Form">
+          <v-card-title>
+            <span class="headline">User Profile</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12>
+                  <v-text-field v-model="UserName" prepend-icon="person" label="Full Name" required :rules="[rules.NameReq]"></v-text-field>
+                </v-flex>
+                <v-flex xs12>
+                  <v-text-field @keyup.enter="UpdateProfile()" v-model="UserEmail" prepend-icon="email" label="Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn flat @click="PassDialogue = !PassDialogue">Change Password</v-btn>            
+            <v-spacer></v-spacer>
+            <v-btn flat @click="dialog = false">Close</v-btn>
+            <v-btn flat @click="UpdateProfile">Save</v-btn>
+          </v-card-actions>
+        </v-form>
       </v-card>
+
+
+      <v-card v-else>
+        <v-form ref="Form">
+          <v-card-title>
+            <span class="headline">User Password</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12>
+                  <v-text-field prepend-icon="lock" label="New Password" required v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn flat @click="PassDialogue = !PassDialogue">Edit Profile</v-btn>            
+            <v-spacer></v-spacer>
+            <v-btn flat @click="dialog = false">Close</v-btn>
+            <v-btn flat @click="UpdateProfile">Save</v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card>
+
     </v-dialog>
   </v-layout>
 </template>
 
 <script>
 import firebase from '../firebase'
+import store from '../store';
 export default {
 	data(){
 		return{
       dialog: false,
       Pass: false,
       RegPass: '',
+      PassDialogue: false,
+
       rules: {
+				NameReq: value => !!value || 'Required.',
 				PassRequired: value => !!value || 'Required.',
 				PassMin: v => v.length >= 8 || 'Min 8 characters',
 				EmailRequired: v => !!v || 'E-mail is required',
@@ -50,16 +79,35 @@ export default {
   methods: {
     ShowModal(){
       this.dialog = true;
+    },
+
+    UpdateProfile(){
+      if(this.$refs.Form.validate()) {
+        
+      }
     }
 
   },
   computed: {
-    UserName(){
-      return this.$store.state.UserName;
+    UserName: {
+      get(){
+        return this.$store.getters.GetUserName;
+      },
+
+      set(value){
+        this.$store.commit('UpdateUsername', value)
+      }
     },
 
-    UserEmail(){
-      return this.$store.state.user.email;
+    UserEmail:{
+      get(){
+        return this.$store.state.user.email;
+      },
+
+      set(value){
+        this.$store.commit('UpdateEmail', value)
+      }
+      
     }
   },
   created(){

@@ -9,6 +9,7 @@ export default new Vuex.Store({
     user: null,
     LoveCount: null,
     UserName: null,
+    UserEmail: null
   },
 
   getters: {
@@ -47,12 +48,18 @@ export default new Vuex.Store({
       if (doc.exists) {
           state.UserName = doc.data().Name;
       } else {
-          console.log("No such document!");
+          console.log("No User Name");
       }
-      }).catch(function(error) {
-          console.log("Error getting document:", error);
       });
-      }
+    },
+
+      UpdateUsername (state, Username) {
+        state.UserName = Username
+      },
+
+      UpdateEmail (state, Email) {
+        state.UserEmail = Email
+      },
 
   },
 
