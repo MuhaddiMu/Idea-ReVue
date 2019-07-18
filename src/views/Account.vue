@@ -4,7 +4,7 @@
       <v-card v-if="!PassDialogue">
         <v-form ref="Form">
           <v-card-title>
-            <span class="headline">User Profile</span><p>{{UserEmail}}</p>
+            <span class="headline">User Profile</span>
           </v-card-title>
           <v-card-text>
             <v-container grid-list-md>
@@ -13,7 +13,7 @@
                   <v-text-field v-model="UserName" prepend-icon="person" label="Full Name" required :rules="[rules.NameReq]"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field v-model="UserEmail" prepend-icon="email" label="Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+                  <v-text-field v-model="UserEmail" prepend-icon="email" label="New Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
                 </v-flex>
               </v-layout>
                 <v-divider  light></v-divider>
@@ -31,7 +31,7 @@
             <v-btn flat @click="PassDialogue = !PassDialogue">Change Password</v-btn>            
             <v-spacer></v-spacer>
             <v-btn flat @click="dialog = false">Close</v-btn>
-            <v-btn flat @click="UpdateProfile">Save</v-btn>
+            <v-btn :loading="Loading" flat @click="UpdateProfile">Save</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -76,6 +76,7 @@ export default {
       CurPass: '',
       CurrentEmail: '',
       PassDialogue: false,
+      Loading: false,
 
       rules: {
 				NameReq: value => !!value || 'Required.',
@@ -93,14 +94,22 @@ export default {
     },
 
     UpdateProfile(){
-
+      let self = this
       var Email = this.$store.state.UserEmail;
-
       if(this.$refs.Form.validate()) {
-          firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass)
-          .then(function(User) {
-            User.user.updateEmail(Email)
-        })
+          this.Loading = true;
+          firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass).then(function(User) {
+            User.user.updateEmail(Email).then(function(){
+              self.Loading = false
+              self.dialog = false
+            }).catch(function(error) {
+                self.Loading = false
+                console.log(error.message)
+            });
+        }).catch(function(error) {
+          self.Loading = false
+          console.log(error.message)
+        });
       }
     }
 
