@@ -1,5 +1,6 @@
 <template>
   <v-layout row justify-center>
+    <v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}<v-btn color="pink" flat @click="Snackbar = false" > Close</v-btn></v-snackbar>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-card v-if="!PassDialogue">
         <v-form ref="Form">
@@ -73,6 +74,8 @@ export default {
 		return{
       dialog: false,
       Pass: false,
+      Snackbar: false,
+      SnackbarMsg: '',
       CurPass: '',
       CurrentEmail: '',
       PassDialogue: false,
@@ -102,13 +105,19 @@ export default {
             User.user.updateEmail(Email).then(function(){
               self.Loading = false
               self.dialog = false
+              self.Snackbar = true
+              self.SnackbarMsg = "Profile Updated"
+              self.CurPass = self.CurrentEmail = ''
+              self.$refs.Form.resetValidation()
             }).catch(function(error) {
                 self.Loading = false
-                console.log(error.message)
+                self.Snackbar = true
+                self.SnackbarMsg = error.message
             });
         }).catch(function(error) {
           self.Loading = false
-          console.log(error.message)
+          self.Snackbar = true
+          self.SnackbarMsg = error.message
         });
       }
     }
