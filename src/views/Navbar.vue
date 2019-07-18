@@ -60,7 +60,6 @@ export default {
       Sidebar: false,
       Navbar: false,
       LogSuccess: false, 
-      Email: this.$store.getters.getUser.email,
 		}
   },
   methods: {
@@ -95,6 +94,9 @@ export default {
       return this.$store.getters.GetUserName;
     },
 
+    Email(){
+      return this.$store.getters.getUser.email
+    }
 
   },
 
