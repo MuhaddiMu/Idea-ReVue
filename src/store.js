@@ -23,7 +23,11 @@ export default new Vuex.Store({
 
     GetUserName: state => {
       return state.UserName;
-    }
+    },
+
+    GetEmail: state => {
+      return state.UserEmail;
+    },
     
   },
 
@@ -53,6 +57,10 @@ export default new Vuex.Store({
       });
     },
 
+    UserEmail: state => {
+      state.UserEmail = firebase.firebase.auth().currentUser.email;
+    },
+
       UpdateUsername (state, Username) {
         state.UserName = Username
       },
@@ -75,6 +83,9 @@ export default new Vuex.Store({
 
     UserName: context => {
       context.commit('UserName');
+    },
+    UserEmail: context => {
+      context.commit('UserEmail');
     }
   }
 });

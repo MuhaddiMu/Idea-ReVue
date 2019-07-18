@@ -4,7 +4,7 @@
       <v-card v-if="!PassDialogue">
         <v-form ref="Form">
           <v-card-title>
-            <span class="headline">User Profile</span>
+            <span class="headline">User Profile</span><p>{{UserEmail}}</p>
           </v-card-title>
           <v-card-text>
             <v-container grid-list-md>
@@ -13,7 +13,16 @@
                   <v-text-field v-model="UserName" prepend-icon="person" label="Full Name" required :rules="[rules.NameReq]"></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field @keyup.enter="UpdateProfile()" v-model="UserEmail" prepend-icon="email" label="Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+                  <v-text-field v-model="UserEmail" prepend-icon="email" label="Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+                </v-flex>
+              </v-layout>
+                <v-divider  light></v-divider>
+              <v-layout wrap>
+                <v-flex xs6>
+                  <v-text-field v-model="CurrentEmail" prepend-icon="email" label="Current Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+                </v-flex>
+                <v-flex xs6>
+                  <v-text-field @keyup.enter="UpdateProfile()" prepend-icon="lock" label="Current Password" required v-model="CurPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass" ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -43,7 +52,8 @@
             </v-container>
           </v-card-text>
           <v-card-actions>
-            <v-btn flat @click="PassDialogue = !PassDialogue">Edit Profile</v-btn>            
+            <v-btn flat @click="PassDialogue = !PassDialogue">Edit Profile</v-btn>  
+            
             <v-spacer></v-spacer>
             <v-btn flat @click="dialog = false">Close</v-btn>
             <v-btn flat @click="UpdateProfile">Save</v-btn>
@@ -63,7 +73,8 @@ export default {
 		return{
       dialog: false,
       Pass: false,
-      RegPass: '',
+      CurPass: '',
+      CurrentEmail: '',
       PassDialogue: false,
 
       rules: {
@@ -82,8 +93,14 @@ export default {
     },
 
     UpdateProfile(){
+
+      var Email = this.$store.state.UserEmail;
+
       if(this.$refs.Form.validate()) {
-        
+          firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass)
+          .then(function(User) {
+            User.user.updateEmail(Email)
+        })
       }
     }
 
@@ -101,7 +118,7 @@ export default {
 
     UserEmail:{
       get(){
-        return this.$store.state.user.email;
+        return this.$store.state.UserEmail;
       },
 
       set(value){
@@ -111,7 +128,8 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch('UserName');
+    this.$store.dispatch('UserName'); 
+    this.$store.dispatch('UserEmail');
   }
 }
 </script>
