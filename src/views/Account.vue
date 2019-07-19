@@ -51,6 +51,15 @@
 								<v-flex xs12>
 									<v-text-field prepend-icon="lock" label="New Password" required v-model="NewPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass"></v-text-field>
 								</v-flex>
+								</v-layout>
+							<v-divider light></v-divider>
+							<v-layout wrap>
+								<v-flex xs6>
+									<v-text-field v-model="CurrentEmail" prepend-icon="email" label="Current Email" required :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
+								</v-flex>
+								<v-flex xs6>
+									<v-text-field @keyup.enter="UpdatePassword()" prepend-icon="lock" label="Current Password" required v-model="CurPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass"></v-text-field>
+								</v-flex>
 							</v-layout>
 						</v-container>
 					</v-card-text>
@@ -59,7 +68,7 @@
 
 						<v-spacer></v-spacer>
 						<v-btn flat @click="dialog = false">Close</v-btn>
-						<v-btn flat @click="UpdateProfile">Save</v-btn>
+						<v-btn flat :loading="Loading" @click="UpdatePassword">Save</v-btn>
 					</v-card-actions>
 				</v-form>
 			</v-card>
@@ -111,6 +120,30 @@ export default {
 						self.Snackbar = true
 						self.SnackbarMsg = "Profile Updated"
 						self.CurPass = self.CurrentEmail = ''
+						self.$refs.Form.resetValidation()
+					}).catch(function(error) {
+						self.Loading = false
+						self.Snackbar = true
+						self.SnackbarMsg = error.message
+					});
+				}).catch(function(error) {
+					self.Loading = false
+					self.Snackbar = true
+					self.SnackbarMsg = error.message
+				});
+			}
+		},
+
+		UpdatePassword() {
+			let self = this
+			if (this.$refs.Form.validate()) {
+				this.Loading = true;
+				firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass).then(function(User) {
+					User.user.updatePassword(self.NewPass).then(function() {
+						self.Loading = false
+						self.Snackbar = true
+						self.dialog = false
+						self.SnackbarMsg = "Password Updated"
 						self.$refs.Form.resetValidation()
 					}).catch(function(error) {
 						self.Loading = false
