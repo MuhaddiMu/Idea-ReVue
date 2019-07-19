@@ -49,7 +49,7 @@
 						<v-container grid-list-md>
 							<v-layout wrap>
 								<v-flex xs12>
-									<v-text-field prepend-icon="lock" label="New Password" required v-model="RegPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass"></v-text-field>
+									<v-text-field prepend-icon="lock" label="New Password" required v-model="NewPass" :append-icon="Pass ? 'visibility' : 'visibility_off'" :rules="[rules.PassRequired, rules.PassMin]" :type="Pass ? 'text' : 'password'" hint="At least 8 characters" counter @click:append="Pass = !Pass"></v-text-field>
 								</v-flex>
 							</v-layout>
 						</v-container>
@@ -81,6 +81,7 @@ export default {
 			CurPass: '',
 			CurrentEmail: '',
 			PassDialogue: false,
+			NewPass: '',
 			Loading: false,
 
 			rules: {
