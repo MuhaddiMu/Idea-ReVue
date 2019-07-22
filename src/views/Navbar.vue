@@ -74,14 +74,7 @@ export default {
     },
 
     LoveUpdate(){
-
-    firebase.firebase.firestore().collection("Love").doc("Counter").set({
-        Count: store.state.LoveCount + 1,
-      }).then(function() {
-          store.dispatch('SetLoveCount');
-      }).catch(function(error) {
-          console.error("Error writing document: ", error);
-      });
+      this.$store.dispatch('UpdateLoveCount');
     }
   },
   computed: {
@@ -101,6 +94,8 @@ export default {
   },
 
 created(){
+
+    this.$store.dispatch('SetLoveCount');
 
     if(this.$store.getters.getUser){
       this.Navbar = true;

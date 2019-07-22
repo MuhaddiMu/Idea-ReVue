@@ -46,6 +46,17 @@ export default new Vuex.Store({
       });
     },
 
+    UpdateLoveCount: state => {
+        state.LoveCount++;
+      firebase.firebase.firestore().collection("Love").doc("Counter").set({
+        Count: state.LoveCount,
+      }).then(function() {
+          //DONE
+      }).catch(function(error) {
+          console.error("Error writing document: ", error);
+      });
+    },
+
     UserName: state => {
       var docRef = firebase.firebase.firestore().collection("Users").doc(state.user.uid);
       docRef.get().then(function(doc) {
@@ -79,6 +90,10 @@ export default new Vuex.Store({
 
     SetLoveCount: context => {
       context.commit('SetLoveCount');
+    },
+    
+    UpdateLoveCount: context => {
+      context.commit('UpdateLoveCount');
     },
 
     UserName: context => {
