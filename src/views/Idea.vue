@@ -10,9 +10,10 @@
 					<v-card-title>
 						<span class="headline">Wohoo! You Got An Idea...</span>
 					</v-card-title>
-
+					<v-container grid-list-md>
+					<v-flex xs12><blockquote><span class="LeftBorder">I write down so many ideas that it hurts my head to come up with one more. Then I try to write down five more.</span><cite> – James Altucher</cite></blockquote></v-flex>
+					</v-container>
 					<v-card-text>
-						<v-container grid-list-md>
 							<v-layout wrap>
 								<v-flex xs12>
 									<v-text-field prepend-inner-icon="edit" :rules="[Rules.Title]" label="Title" box></v-text-field>
@@ -59,6 +60,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+  .LeftBorder:before, .LeftBorder:after {
+      content: '\201C';
+      color: lighten(hsl(200, 40, 10), 40%);
+   }
+   .LeftBorder:after {
+      content: '\201D';
+   }
 
 </style>
