@@ -86,17 +86,23 @@ export default {
 		},
 
 		SaveIdea(){
+			let self = this
 			if (this.$refs.Form.validate()) {
 				this.Loading = true;
-				firebase.firebase.ref('Ideas').doc().set({
+				firebase.firebase.firestore().collection("Ideas").doc().set({
 					Title: this.Title,
 					Description: this.Description,
 					Completed: false,
-					ToBeCompleted: computedDateFormattedMomentjs,
-					Added: new Date().toISOString().substr(0, 10) ? moment(new Date().toISOString().substr(0, 10)).format('Do MMMM YYYY') : ''
-				}).then(function(Idea){
-					console.log('DONE')
-					console.log(Idea)
+					ToBeCompleted: this.computedDateFormattedMomentjs,
+					Added: moment().format('Do MMMM YYYY')
+				}).then(function(Idea) {
+					self.Loading = false
+					self.dialog = false
+					self.SnackbarMsg = 'Ideated Successfully!'
+					self.Snackbar = true
+				})
+				.catch(function(error) {
+					
 				});
 			}
 		}
