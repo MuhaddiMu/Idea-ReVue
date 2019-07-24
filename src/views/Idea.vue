@@ -39,6 +39,7 @@
 											></v-text-field>
 										</template>
 										<v-date-picker
+											:min="MinDate"
 											v-model="date"
 											@change="DateBox = false"
 										></v-date-picker>
@@ -69,6 +70,7 @@ export default {
 			dialog: false,
 			Snackbar: false,
 			SnackbarMsg: '',
+			MinDate: moment().format('YYYY-MM-DD'),
 			Loading: false,
 			ToBeCompleted: '',
 			Title: '',
