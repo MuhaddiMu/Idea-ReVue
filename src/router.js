@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Dashboard from "./views/Dashboard.vue";
 import Auth from "./views/Auth.vue";
+import MyIdeas from "./views/MyIdeas.vue";
 
 Vue.use(Router);
 
