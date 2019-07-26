@@ -25,7 +25,10 @@ export default new Router({
     {
       path: "/MyIdeas",
       name: "MyIdeas",
-      component: Auth,
+      component: MyIdeas,
+      meta: {
+        requiresAuth: true
+      }
     },
   ]
 });
