@@ -5,6 +5,7 @@
 		</v-snackbar>
 		<v-dialog dark v-model="dialog" persistent max-width="600px">
 			<v-card v-if="!PassDialogue">
+				<vue-headful title="Update Profile | Idea Re-Vue"/>
 				<v-form ref="Form">
 					<v-card-title>
 						<span class="headline">User Profile</span>
@@ -41,6 +42,7 @@
 
 
 			<v-card v-else>
+				<vue-headful title="Update Password | Idea Re-Vue"/>
 				<v-form ref="Form">
 					<v-card-title>
 						<span class="headline">User Password</span>

@@ -1,5 +1,6 @@
 <template>
 	<v-container>
+		<vue-headful title="My Ideas | Idea Re-Vue"/>
 		<v-layout align-center justify-center row wrap>
 			<v-flex xs12 md6>
 				<v-card  v-ripple justify-center dark color="primary">

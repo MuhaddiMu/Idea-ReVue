@@ -27,12 +27,12 @@
         </v-flex>
       </v-layout>
       <v-list>
-        <v-list-tile @click="ShowModal" v-ripple>
+        <v-list-tile to="/" v-ripple>
           <v-list-tile-action>
-            <v-icon>edit</v-icon>
+            <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content class="grey--text">
-           Update Account
+           Dashboard
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile @click="ShowIdeaModal" v-ripple>
@@ -51,6 +51,14 @@
           </v-list-tile-action>
           <v-list-tile-content class="grey--text">
            My Ideas
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="ShowModal" v-ripple>
+          <v-list-tile-action>
+            <v-icon>edit</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content class="grey--text">
+           Update Account
           </v-list-tile-content>
         </v-list-tile>
       </v-list>

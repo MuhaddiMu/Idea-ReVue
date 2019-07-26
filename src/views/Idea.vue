@@ -1,5 +1,6 @@
 <template>
 	<v-layout row justify-center>
+		<vue-headful title="New Idea | Idea Re-Vue"/>
 		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}
 			<v-btn color="pink" flat @click="Snackbar = false"> Close</v-btn>
 		</v-snackbar>
