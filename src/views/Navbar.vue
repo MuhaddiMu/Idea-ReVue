@@ -45,6 +45,14 @@
            Got an Idea?
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile to="MyIdeas" v-ripple>
+          <v-list-tile-action>
+            <v-icon>stars</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content class="grey--text">
+           My Ideas
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
   </v-navigation-drawer>
   <v-snackbar v-model="LogSuccess" top>Success! Welcome to Dashboard<v-btn color="pink" flat @click="LogSuccess = false" > Close</v-btn></v-snackbar>

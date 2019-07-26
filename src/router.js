@@ -22,5 +22,10 @@ export default new Router({
       name: "Auth",
       component: Auth,
     },
+    {
+      path: "/MyIdeas",
+      name: "MyIdeas",
+      component: Auth,
+    },
   ]
 });
