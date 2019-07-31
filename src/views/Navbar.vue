@@ -9,10 +9,10 @@
 
     <v-toolbar-items class="hidden-sm-and-down">
 	  <v-tooltip left><template v-slot:activator="{ on }">
-		 <v-btn left v-on="on" fab flat><v-icon @click="LoveUpdate" large color="pink">favorite</v-icon></v-btn>
+		 <v-btn v-on="on" fab flat><v-icon @click="LoveUpdate" large color="pink">favorite</v-icon></v-btn>
       </template><span>Show Love By Tapping</span></v-tooltip>
-      <v-btn :ripple="false" class="TotalCount" font-weight-bold left flat><kbd class="body-2"><b>{{LoveCount}}</b> <v-icon class="ml-1" small>favorite</v-icon></kbd></v-btn>
-      <v-btn @click="LogOut" flat>Log Out<v-icon right>exit_to_app</v-icon></v-btn>
+      <v-btn :ripple="false" class="TotalCount" font-weight-bold flat><kbd class="body-2"><b>{{LoveCount}}</b> <v-icon small>favorite</v-icon></kbd></v-btn>
+      <v-btn @click="LogOut" fab flat><v-icon >exit_to_app</v-icon></v-btn>
     </v-toolbar-items>
   </v-toolbar>
 
@@ -35,7 +35,7 @@
            Dashboard
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="ShowIdeaModal" v-ripple>
+        <v-list-tile to="" @click="ShowIdeaModal" v-ripple>
           <v-list-tile-action>
             <svg colo style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="#00000" fill-opacity="0.5" d="M12,6A6,6 0 0,1 18,12C18,14.22 16.79,16.16 15,17.2V19A1,1 0 0,1 14,20H10A1,1 0 0,1 9,19V17.2C7.21,16.16 6,14.22 6,12A6,6 0 0,1 12,6M14,21V22A1,1 0 0,1 13,23H11A1,1 0 0,1 10,22V21H14M20,11H23V13H20V11M1,11H4V13H1V11M13,1V4H11V1H13M4.92,3.5L7.05,5.64L5.63,7.05L3.5,4.93L4.92,3.5M16.95,5.63L19.07,3.5L20.5,4.93L18.37,7.05L16.95,5.63Z" />

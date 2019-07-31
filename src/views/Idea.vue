@@ -20,7 +20,7 @@
 									<v-text-field prepend-inner-icon="edit" v-model="Title" :rules="[Rules.Title]" label="Title" box></v-text-field>
 								</v-flex>
 								<v-flex xs12>
-									<v-text-field prepend-inner-icon="format_align_left" v-model="Description" label="Description" append-icon="star" box></v-text-field>
+									<v-select :items="['Private', 'Public']" :rules="[Rules.Visibility]" prepend-inner-icon="visibility" v-model="Visibility" label="Visibility" box></v-select>
 								</v-flex>
 								<v-flex>
 									<v-menu dark
@@ -35,6 +35,7 @@
 											:value="computedDateFormattedMomentjs"
 											box
 											label="Expected Date to Complete"
+											:rules="[Rules.Date]"
 											readonly
 											v-on="on"
 											></v-text-field>
@@ -45,6 +46,9 @@
 											@change="DateBox = false"
 										></v-date-picker>
 										</v-menu>
+								</v-flex>
+								<v-flex xs12>
+									<v-textarea rows="2" auto-grow filled prepend-inner-icon="format_align_left" v-model="Description" label="Description" append-icon="star"></v-textarea>
 								</v-flex>
 							</v-layout>
 					</v-card-text>
@@ -76,9 +80,12 @@ export default {
 			ToBeCompleted: '',
 			Title: '',
 			Description: '',
+			Visibility: '',
 			Rules: {
-				Title: value => !!value || 'Required.',
-				ToBeCompleted: value => !!value || 'Required.',
+				Title: 			value => !!value || 'Required.',
+				ToBeCompleted:  value => !!value || 'Required.',
+				Visibility: 	value => !!value || 'Required.',
+				Date: 			value => !!value || 'Required.',
 			}
 		}
 	},
@@ -95,6 +102,7 @@ export default {
 				firebase.firebase.firestore().collection("Ideas").doc().set({
 					Title: this.Title,
 					Description: this.Description,
+					Visibility: this.Visibility,
 					Completed: false,
 					ToBeCompleted: this.computedDateFormattedMomentjs,
 					Added: moment().format('Do MMMM YYYY')
@@ -103,6 +111,9 @@ export default {
 					self.dialog = false
 					self.SnackbarMsg = 'Ideated Successfully!'
 					self.Snackbar = true
+					self.$refs.Form.resetValidation();
+					self.Title = self.Description = self.Visibility = self.date = '';
+
 				})
 				.catch(function(error) {
 					
