@@ -4,8 +4,7 @@
 		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}
 			<v-btn color="pink" flat @click="Snackbar = false"> Close</v-btn>
 		</v-snackbar>
-		
-		<v-dialog v-model="dialog" dark persistent max-width="500px">
+		<v-dialog v-model="dialog" dark max-width="500px">
 			<v-card>
 				<v-form ref="Form">
 					<v-card-title>

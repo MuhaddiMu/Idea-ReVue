@@ -3,7 +3,7 @@
 		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}
 			<v-btn color="pink" flat @click="Snackbar = false"> Close</v-btn>
 		</v-snackbar>
-		<v-dialog dark v-model="dialog" persistent max-width="600px">
+		<v-dialog dark v-model="dialog" max-width="600px">
 			<v-card v-if="!PassDialogue">
 				<vue-headful title="Update Profile | Idea Re-Vue"/>
 				<v-form ref="Form">
