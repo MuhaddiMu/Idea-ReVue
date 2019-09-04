@@ -69,7 +69,7 @@ export default new Vuex.Store({
     },
 
     UserEmail: state => {
-      state.UserEmail = firebase.firebase.auth().currentUser.email;
+      state.UserEmail = firebase.firebase.auth().currentUser.email; //User Login State
     },
 
       UpdateUsername (state, Username) {
@@ -81,7 +81,6 @@ export default new Vuex.Store({
       },
 
   },
-
 
   actions: {
     setUser: context => {
