@@ -1,12 +1,10 @@
 import Vue from "vue";
-import "./plugins/vuetify";
+import vuetify from './plugins/vuetify';
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import Vuetify from "vuetify";
-import "vuetify/dist/vuetify.min.css";
 import vueHeadful from 'vue-headful';
-import "./stylus/main.styl";
+//import "./stylus/main.styl";
 import firebase from './firebase'
 import Gravatar from 'vue-gravatar';
  
@@ -15,7 +13,6 @@ Vue.component('v-gravatar', Gravatar);
 Vue.prototype.$eventBus = new Vue();
 
 Vue.component('vue-headful', vueHeadful);
-Vue.use(Vuetify);
 
 router.beforeEach((to, from, next) => {
   const currentUser = firebase.firebase.auth().currentUser;
@@ -35,6 +32,7 @@ Vue.config.productionTip = false;
   new Vue({
     router,
     store,
+    vuetify,
     render: h => h(App)
   }).$mount("#app");
 });
