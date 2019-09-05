@@ -2,7 +2,7 @@
   <v-app>
     <Navbar v-if="ShowNavbar"></Navbar>
     <v-content class="mx-4 mb-4" grey lighten-4>
-      <router-view></router-view>
+      <keep-alive><router-view></router-view></keep-alive>
     </v-content>
   </v-app>
 </template>

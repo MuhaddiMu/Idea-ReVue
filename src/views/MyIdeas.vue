@@ -1,12 +1,29 @@
 <template>
 	<v-container>
 		<vue-headful title="My Ideas | Idea Re-Vue"/>
-		<v-layout align-center justify-center row wrap>
-			<v-flex xs12 md6>
-				<v-card  v-ripple justify-center dark color="primary">
-					<v-card-text class="text-xs-center px-0 heading">Welcome to My Ideas</v-card-text>
+		<v-layout row wrap>
+			
+			<v-flex class="ml-2" xs6 md3>
+				<v-card hover max-width="320" class="mx-auto">
+					<v-card-title class="title">My Card Title</v-card-title>
+					<v-card-text>Card Description Goes Here... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</v-card-text>
+					<v-card-actions class="caption grey--text text--darken-3">
+						Added on: 4th September 2019<v-spacer></v-spacer>
+            		<v-btn icon><v-icon>more_vert</v-icon></v-btn>
+					</v-card-actions>
 				</v-card>
 			</v-flex>
+			<v-flex class="ml-2" xs6 md3>
+				<v-card hover max-width="320" class="mx-auto">
+					<v-card-title class="title">My Card Title</v-card-title>
+					<v-card-text>Card Description Goes Here... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...</v-card-text>
+					<v-card-actions class="caption grey--text text--darken-3">
+						Added on: 4th September 2019<v-spacer></v-spacer>
+            		<v-btn icon><v-icon>more_vert</v-icon></v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-flex>
+
 		</v-layout>
 	</v-container>
 </template>
