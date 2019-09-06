@@ -1,7 +1,7 @@
 <template>
 	<v-container>
 		<h1 class="text-xs-center display-3 blue--text Title">Idea Re-Vue</h1>
-		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}<v-btn color="pink" flat @click="Snackbar = false" > Close</v-btn></v-snackbar>
+		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}<v-btn color="pink" text @click="Snackbar = false" > Close</v-btn></v-snackbar>
 		<v-layout align-center justify-center row wrap>
 			<v-flex xs12 md6>
 				<v-card v-if="Login" justify-center color="grey lighten-4">
@@ -20,8 +20,8 @@
 
 
 						<v-flex align-self-center xs6 md8 offset-sm4>
-							<v-btn @click="LogIn" flat :loading="Loading">Log In</v-btn>
-							<v-btn @click="Login = !Login" flat>Register</v-btn>
+							<v-btn @click="LogIn" text :loading="Loading">Log In</v-btn>
+							<v-btn @click="Login = !Login" text>Register</v-btn>
 						</v-flex>
 					</v-form>
 				</v-card>
@@ -47,9 +47,9 @@
 
 
 						<v-flex align-self-center xs6 md8 offset-sm4>
-							<v-btn @click="Login = !Login" flat>Log In</v-btn>
+							<v-btn @click="Login = !Login" text>Log In</v-btn>
 
-							<v-btn @click="Register" flat :loading="Loading">Register</v-btn>
+							<v-btn @click="Register" text :loading="Loading">Register</v-btn>
 						</v-flex>
 					</v-form>
 				</v-card>

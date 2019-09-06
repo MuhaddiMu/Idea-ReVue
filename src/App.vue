@@ -9,6 +9,7 @@
 
 <script>
 import Navbar from "./views/Navbar";
+import WebFontLoader from 'webfontloader';
 
 export default {
   name: "App",
@@ -24,9 +25,22 @@ export default {
       this.$store.dispatch('SetLoveCount');
       this.$store.dispatch('setUser');
     },
+     setFontLoaded() {
+      this.$emit('font-loaded');
+    },
   },
     created() {
     this.setUser();
+
+    WebFontLoader.load({
+      google: {
+        // Use FVD notation to include families https://github.com/typekit/fvd
+        families: ['Nunito'],
+        // Path to stylesheet that defines font-face
+      },
+      active: this.setFontLoaded,
+    });
+
   },
   computed: {
     ShowNavbar(){
@@ -39,3 +53,26 @@ export default {
   },
 };
 </script>
+<style lang="scss" >
+$typoOptions: display-4 display-3 display-2 display-1 headline title subtitle-1 subtitle-2 body-1 body-2 caption overline;
+
+%font-choice {
+  font-family: "Nunito", sans-serif !important;
+}
+
+@mixin md-typography {
+  @each $typoOption in $typoOptions {
+    .#{$typoOption} {
+      @extend %font-choice;
+    }
+  }
+}
+
+.v-application {
+  // font-size: 12px;
+  @extend %font-choice;
+  @include md-typography;
+}
+
+
+</style>

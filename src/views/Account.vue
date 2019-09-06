@@ -1,7 +1,7 @@
 <template>
 	<v-layout row justify-center>
 		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}
-			<v-btn color="pink" flat @click="Snackbar = false"> Close</v-btn>
+			<v-btn color="pink" text @click="Snackbar = false"> Close</v-btn>
 		</v-snackbar>
 		<v-dialog dark v-model="dialog" max-width="600px">
 			<v-card v-if="!PassDialogue">
@@ -32,10 +32,10 @@
 						</v-container>
 					</v-card-text>
 					<v-card-actions>
-						<v-btn flat @click="PassDialogue = !PassDialogue">Change Password</v-btn>
+						<v-btn text @click="PassDialogue = !PassDialogue">Change Password</v-btn>
 						<v-spacer></v-spacer>
-						<v-btn flat @click="dialog = false">Close</v-btn>
-						<v-btn :loading="Loading" flat @click="UpdateProfile">Save</v-btn>
+						<v-btn text @click="dialog = false">Close</v-btn>
+						<v-btn :loading="Loading" text @click="UpdateProfile">Save</v-btn>
 					</v-card-actions>
 				</v-form>
 			</v-card>
@@ -66,11 +66,11 @@
 						</v-container>
 					</v-card-text>
 					<v-card-actions>
-						<v-btn flat @click="PassDialogue = !PassDialogue">Edit Profile</v-btn>
+						<v-btn text @click="PassDialogue = !PassDialogue">Edit Profile</v-btn>
 
 						<v-spacer></v-spacer>
-						<v-btn flat @click="dialog = false">Close</v-btn>
-						<v-btn flat :loading="Loading" @click="UpdatePassword">Save</v-btn>
+						<v-btn text @click="dialog = false">Close</v-btn>
+						<v-btn text :loading="Loading" @click="UpdatePassword">Save</v-btn>
 					</v-card-actions>
 				</v-form>
 			</v-card>

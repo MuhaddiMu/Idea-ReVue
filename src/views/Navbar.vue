@@ -1,6 +1,6 @@
 <template>
 <nav v-show="Navbar">
-  <v-toolbar app>
+  <v-app-bar app>
     <v-toolbar-side-icon class="grey--text" @click="Sidebar = !Sidebar"></v-toolbar-side-icon>
     <v-toolbar-title class="grey--text text-uppercase">
 		<span class="subheading">Idea</span><span class="">Re-Vue</span>
@@ -9,12 +9,12 @@
 
     <v-toolbar-items class="hidden-sm-and-down">
 	  <v-tooltip left><template v-slot:activator="{ on }">
-		 <v-btn v-on="on" fab flat><v-icon @click="LoveUpdate" large color="pink">favorite</v-icon></v-btn>
+		 <v-btn v-on="on" fab text><v-icon @click="LoveUpdate" large color="pink">favorite</v-icon></v-btn>
       </template><span>Show Love By Tapping</span></v-tooltip>
-      <v-btn :ripple="false" class="TotalCount" font-weight-bold flat><kbd class="body-2"><b>{{LoveCount}}</b> <v-icon small>favorite</v-icon></kbd></v-btn>
-      <v-btn @click="LogOut" fab flat><v-icon >exit_to_app</v-icon></v-btn>
+      <v-btn :ripple="false" class="TotalCount" font-weight-bold text><kbd class="body-2"><b>{{LoveCount}}</b> <v-icon small>favorite</v-icon></kbd></v-btn>
+      <v-btn @click="LogOut" fab text><v-icon >exit_to_app</v-icon></v-btn>
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 
     <v-navigation-drawer v-model="Sidebar" app>
       <v-layout align-center justify-center column text-xs-center>
@@ -63,7 +63,7 @@
         </v-list-tile>
       </v-list>
   </v-navigation-drawer>
-  <v-snackbar v-model="LogSuccess" top>Success! Welcome to Dashboard<v-btn color="pink" flat @click="LogSuccess = false" > Close</v-btn></v-snackbar>
+  <v-snackbar v-model="LogSuccess" top>Success! Welcome to Dashboard<v-btn color="pink" text @click="LogSuccess = false" > Close</v-btn></v-snackbar>
 
   <Account ref="Account"></Account>
   <Idea ref="Idea"></Idea>

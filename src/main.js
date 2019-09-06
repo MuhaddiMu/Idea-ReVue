@@ -4,7 +4,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vueHeadful from 'vue-headful';
-import "./sass/main.scss";
 import firebase from './firebase'
 import Gravatar from 'vue-gravatar';
  

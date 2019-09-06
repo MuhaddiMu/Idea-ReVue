@@ -18,7 +18,8 @@
     "vue-headful": "^2.0.1",
     "vue-router": "^3.0.3",
     "vuetify": "^2.0.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",

@@ -2,7 +2,7 @@
 	<v-layout row justify-center>
 		<vue-headful title="New Idea | Idea Re-Vue"/>
 		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}
-			<v-btn color="pink" flat @click="Snackbar = false"> Close</v-btn>
+			<v-btn color="pink" text @click="Snackbar = false"> Close</v-btn>
 		</v-snackbar>
 		<v-dialog v-model="dialog" dark max-width="500px">
 			<v-card>
@@ -53,8 +53,8 @@
 					</v-card-text>
 					<v-card-actions>
 					<v-spacer></v-spacer>
-						<v-btn flat @click="dialog = false">Close</v-btn>
-						<v-btn @click="SaveIdea" class="primary" :loading="Loading" flat >Save</v-btn>
+						<v-btn text @click="dialog = false">Close</v-btn>
+						<v-btn @click="SaveIdea" class="primary" :loading="Loading" text >Save</v-btn>
 					</v-card-actions>
 				</v-form>
 			</v-card>
