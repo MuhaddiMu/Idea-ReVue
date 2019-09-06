@@ -1,37 +1,36 @@
-import Vue from "vue";
-import vuetify from './plugins/vuetify';
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import vueHeadful from 'vue-headful';
-import firebase from './firebase'
-import Gravatar from 'vue-gravatar';
- 
-Vue.component('v-gravatar', Gravatar);
+import Vue from "vue"
+import vuetify from "./plugins/vuetify"
+import App from "./App.vue"
+import router from "./router"
+import store from "./store"
+import vueHeadful from "vue-headful"
+import firebase from "./firebase"
+import Gravatar from "vue-gravatar"
 
-Vue.prototype.$eventBus = new Vue();
+Vue.component("v-gravatar", Gravatar)
 
-Vue.component('vue-headful', vueHeadful);
+Vue.prototype.$eventBus = new Vue()
+
+Vue.component("vue-headful", vueHeadful)
 
 router.beforeEach((to, from, next) => {
-  const currentUser = firebase.firebase.auth().currentUser;
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const currentUser = firebase.firebase.auth().currentUser
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if (requiresAuth && !currentUser) {
-    next('/Auth'); 
+    next("/Auth")
   } else if (requiresAuth && currentUser) {
-    next();
+    next()
   } else {
-    next();
+    next()
   }
-});
+})
 
-
-Vue.config.productionTip = false;
-  firebase.firebase.auth().onAuthStateChanged(function (user) {
+Vue.config.productionTip = false
+firebase.firebase.auth().onAuthStateChanged(function(user) {
   new Vue({
     router,
     store,
     vuetify,
     render: h => h(App)
-  }).$mount("#app");
-});
+  }).$mount("#app")
+})
