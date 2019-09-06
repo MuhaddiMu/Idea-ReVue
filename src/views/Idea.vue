@@ -16,10 +16,10 @@
 					<v-card-text>
 							<v-layout wrap>
 								<v-flex xs12>
-									<v-text-field prepend-inner-icon="edit" v-model="Title" :rules="[Rules.Title]" label="Title" box></v-text-field>
+									<v-text-field prepend-inner-icon="edit" v-model="Title" :rules="[Rules.Title]" label="Title" filled></v-text-field>
 								</v-flex>
 								<v-flex xs12>
-									<v-select :items="['Private', 'Public']" :rules="[Rules.Visibility]" prepend-inner-icon="visibility" v-model="Visibility" label="Visibility" box></v-select>
+									<v-select :items="['Private', 'Public']" :rules="[Rules.Visibility]" prepend-inner-icon="visibility" v-model="Visibility" label="Visibility" filled></v-select>
 								</v-flex>
 								<v-flex>
 									<v-menu dark
@@ -32,7 +32,7 @@
 											<v-text-field
 											prepend-inner-icon="date_range"
 											:value="computedDateFormattedMomentjs"
-											box
+											filled
 											label="Expected Date to Complete"
 											:rules="[Rules.Date]"
 											readonly
@@ -105,7 +105,7 @@ export default {
 					Completed: false,
 					ToBeCompleted: this.computedDateFormattedMomentjs,
 					Added: moment().format('Do MMMM YYYY')
-				}).then(function(Idea) {
+				}).then(function(Idea) {sdasd
 					self.Loading = false
 					self.dialog = false
 					self.SnackbarMsg = 'Ideated Successfully!'

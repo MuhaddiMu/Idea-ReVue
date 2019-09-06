@@ -1,7 +1,7 @@
 <template>
 <nav v-show="Navbar">
   <v-app-bar app>
-    <v-toolbar-side-icon class="grey--text" @click="Sidebar = !Sidebar"></v-toolbar-side-icon>
+    <v-icon class="grey--text mr-2" @click="Sidebar = !Sidebar">menu</v-icon>
     <v-toolbar-title class="grey--text text-uppercase">
 		<span class="subheading">Idea</span><span class="">Re-Vue</span>
 		</v-toolbar-title>
@@ -17,7 +17,7 @@
   </v-app-bar>
 
     <v-navigation-drawer v-model="Sidebar" app>
-      <v-layout align-center justify-center column text-xs-center>
+      <v-layout align-center justify-center column text-center>
         <v-flex mt-3>
           <v-avatar size="100">
             <v-gravatar :email="Email" :size="400"/>
@@ -27,40 +27,48 @@
         </v-flex>
       </v-layout>
       <v-list>
-        <v-list-tile to="/" v-ripple>
-          <v-list-tile-action>
+        <v-list-item to="/" v-ripple>
+          <v-list-item-icon>
             <v-icon>dashboard</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content class="grey--text">
-           Dashboard
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile to="" @click="ShowIdeaModal" v-ripple>
-          <v-list-tile-action>
-            <svg colo style="width:24px;height:24px" viewBox="0 0 24 24">
+          </v-list-item-icon>
+          <v-list-item-content class="grey--text">
+           <v-list-item-title>Dashboard</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+
+        <v-list-item to="" @click="ShowIdeaModal" v-ripple>
+          <v-list-item-icon>
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="#00000" fill-opacity="0.5" d="M12,6A6,6 0 0,1 18,12C18,14.22 16.79,16.16 15,17.2V19A1,1 0 0,1 14,20H10A1,1 0 0,1 9,19V17.2C7.21,16.16 6,14.22 6,12A6,6 0 0,1 12,6M14,21V22A1,1 0 0,1 13,23H11A1,1 0 0,1 10,22V21H14M20,11H23V13H20V11M1,11H4V13H1V11M13,1V4H11V1H13M4.92,3.5L7.05,5.64L5.63,7.05L3.5,4.93L4.92,3.5M16.95,5.63L19.07,3.5L20.5,4.93L18.37,7.05L16.95,5.63Z" />
             </svg>
-          </v-list-tile-action>
-          <v-list-tile-content class="grey--text">
+          </v-list-item-icon>
+          <v-list-item-content class="grey--text">
            Got an Idea?
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile to="MyIdeas" v-ripple>
-          <v-list-tile-action>
+          </v-list-item-content>
+        </v-list-item>
+
+
+        <v-list-item to="MyIdeas" v-ripple>
+          <v-list-item-icon>
             <v-icon>stars</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content class="grey--text">
+          </v-list-item-icon>
+          <v-list-item-content class="grey--text">
            My Ideas
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile @click="ShowModal" v-ripple>
-          <v-list-tile-action>
+          </v-list-item-content>
+        </v-list-item>
+
+
+        <v-list-item @click="ShowModal" v-ripple>
+          <v-list-item-icon>
             <v-icon>edit</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content class="grey--text">
+          </v-list-item-icon>
+          <v-list-item-content class="grey--text">
            Update Account
-          </v-list-tile-content>
-        </v-list-tile>
+          </v-list-item-content>
+        </v-list-item>
+
+        
       </v-list>
   </v-navigation-drawer>
   <v-snackbar v-model="LogSuccess" top>Success! Welcome to Dashboard<v-btn color="pink" text @click="LogSuccess = false" > Close</v-btn></v-snackbar>

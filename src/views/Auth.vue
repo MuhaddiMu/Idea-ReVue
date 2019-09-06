@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<h1 class="text-xs-center display-3 blue--text Title">Idea Re-Vue</h1>
+		<h1 class="text-center display-3 blue--text Title">Idea Re-Vue</h1>
 		<v-snackbar v-model="Snackbar" top>{{SnackbarMsg}}<v-btn color="pink" text @click="Snackbar = false" > Close</v-btn></v-snackbar>
 		<v-layout align-center justify-center row wrap>
 			<v-flex xs12 md6>
@@ -8,7 +8,7 @@
 					<v-form ref="form">
 						<vue-headful title="Account Login | Idea Re-Vue"/>
 
-						<v-card-text class="headline text-xs-center px-0">Account Login</v-card-text>
+						<v-card-text class="headline text-center px-0">Account Login</v-card-text>
 
 						<v-flex align-self-center xs6 md8 offset-sm2>
 							<v-text-field v-model="LoginEmail" key="LoginEmail" label="Email" prepend-icon="email" :rules="[rules.EmailRequired, rules.EmailValid]"></v-text-field>
@@ -31,7 +31,7 @@
 					<v-form ref="form">
 						<vue-headful title="Account Registeration | Idea Re-Vue"/>
 
-						<v-card-text class="headline text-xs-center px-0">Account Registeration</v-card-text>
+						<v-card-text class="headline text-center px-0">Account Registeration</v-card-text>
 
 						<v-flex align-self-center xs6 md8 offset-sm2>
 							<v-text-field v-model="RegName" key="RegName" label="Full Name" prepend-icon="person" :rules="[rules.NameReq]"></v-text-field>
