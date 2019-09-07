@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <vue-headful title="New Idea | Idea Re-Vue" />
     <v-snackbar v-model="Snackbar" top>
-      {{SnackbarMsg}}
+      {{ SnackbarMsg }}
       <v-btn color="pink" text @click="Snackbar = false">Close</v-btn>
     </v-snackbar>
     <v-dialog v-model="dialog" dark max-width="500px">
@@ -14,9 +14,10 @@
           <v-container grid-list-md>
             <v-flex xs12>
               <blockquote>
-                <span
-                  class="LeftBorder"
-                >I write down so many ideas that it hurts my head to come up with one more. Then I try to write down five more.</span>
+                <span class="LeftBorder"
+                  >I write down so many ideas that it hurts my head to come up
+                  with one more. Then I try to write down five more.</span
+                >
                 <cite>– James Altucher</cite>
               </blockquote>
             </v-flex>
@@ -61,7 +62,11 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker :min="MinDate" v-model="date" @change="DateBox = false"></v-date-picker>
+                  <v-date-picker
+                    :min="MinDate"
+                    v-model="date"
+                    @change="DateBox = false"
+                  ></v-date-picker>
                 </v-menu>
               </v-flex>
               <v-flex xs12>
@@ -80,7 +85,9 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text @click="dialog = false">Close</v-btn>
-            <v-btn @click="SaveIdea" class="primary" :loading="Loading" text>Save</v-btn>
+            <v-btn @click="SaveIdea" class="primary" :loading="Loading" text
+              >Save</v-btn
+            >
           </v-card-actions>
         </v-form>
       </v-card>
