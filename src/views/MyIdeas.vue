@@ -1,8 +1,9 @@
 <template>
     <v-container>
         <vue-headful title="My Ideas | Idea Re-Vue" />
-        <v-layout justify-center="" row wrap>
-            <v-flex v-for="Idea in Ideas" :key="Idea.DocID" class="ma-2" xs6 md3>
+        <v-layout  v-masonry transition-duration="3s" item-selector=".item" class="masonry-container" justify-center row wrap>
+              <v-flex v-masonry-tile class="item ma-2" v-for="Idea in Ideas" :key="Idea.DocID" xs6 md3>
+              
                 <v-card hover max-width="320" class="mx-auto">
                     <v-card-Title class="title">{{ Idea.Title}}
                         <v-spacer></v-spacer>
@@ -83,4 +84,7 @@ export default {
 </script>
 
 <style>
+v-card {
+  color: aqua;
+}
 </style>

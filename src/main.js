@@ -6,6 +6,10 @@ import store from "./store"
 import vueHeadful from "vue-headful"
 import firebase from "./firebase"
 import Gravatar from "vue-gravatar"
+import { VueMasonryPlugin } from 'vue-masonry';
+
+Vue.use(VueMasonryPlugin)
+
 
 Vue.component("v-gravatar", Gravatar)
 
@@ -26,7 +30,7 @@ router.beforeEach((to, from, next) => {
 })
 
 Vue.config.productionTip = false
-firebase.firebase.auth().onAuthStateChanged(function(user) {
+firebase.firebase.auth().onAuthStateChanged(function (user) {
   new Vue({
     router,
     store,
