@@ -1,8 +1,8 @@
 <template>
     <v-container>
         <vue-headful title="My Ideas | Idea Re-Vue" />
-        <v-layout row wrap>
-            <v-flex v-for="Idea in Ideas" :key="Idea.DocID" class="justify-center ma-2" xs6 md3>
+        <v-layout justify-center="" row wrap>
+            <v-flex v-for="Idea in Ideas" :key="Idea.DocID" class="ma-2" xs6 md3>
                 <v-card hover max-width="320" class="mx-auto">
                     <v-card-Title class="title">{{ Idea.Title}}
                         <v-spacer></v-spacer>
@@ -19,7 +19,7 @@
 
 
                     <v-card-actions class="caption grey--text text--darken-3">
-                        Added on: {{ Idea.Added }} Visibility: {{ Idea.Visibility }}
+                        Added on: {{ Idea.Added }}<br>Visibility: {{ Idea.Visibility }}
                         <v-spacer></v-spacer>
                         <v-menu nudge-top="6" top offset-x>
                             <template v-slot:activator="{ on }">
@@ -79,7 +79,7 @@ export default {
   created() {
     this.GetIdeas();
   }
-};
+}
 </script>
 
 <style>
