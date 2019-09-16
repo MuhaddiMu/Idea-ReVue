@@ -2,7 +2,9 @@
   <v-app>
     <Navbar v-if="ShowNavbar"></Navbar>
     <v-content class="mx-4 mb-4" grey lighten-4>
-      <keep-alive><router-view></router-view></keep-alive>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </v-content>
   </v-app>
 </template>
@@ -20,16 +22,16 @@ export default {
     return {
     };
   },
-   methods: {
-    setUser: function() {
+  methods: {
+    setUser: function () {
       this.$store.dispatch('SetLoveCount');
       this.$store.dispatch('setUser');
     },
-     setFontLoaded() {
+    setFontLoaded() {
       this.$emit('font-loaded');
     },
   },
-    created() {
+  created() {
     this.setUser();
 
     WebFontLoader.load({
@@ -43,8 +45,8 @@ export default {
 
   },
   computed: {
-    ShowNavbar(){
-      if(this.$store.getters.getUser){
+    ShowNavbar() {
+      if (this.$store.getters.getUser) {
         return true;
       } else {
         return false;
@@ -54,7 +56,8 @@ export default {
 };
 </script>
 <style lang="scss" >
-$typoOptions: display-4 display-3 display-2 display-1 headline title subtitle-1 subtitle-2 body-1 body-2 caption overline;
+$typoOptions: display-4 display-3 display-2 display-1 headline title subtitle-1
+  subtitle-2 body-1 body-2 caption overline;
 
 %font-choice {
   font-family: "Nunito", sans-serif !important;
@@ -73,6 +76,4 @@ $typoOptions: display-4 display-3 display-2 display-1 headline title subtitle-1 
   @extend %font-choice;
   @include md-typography;
 }
-
-
 </style>
