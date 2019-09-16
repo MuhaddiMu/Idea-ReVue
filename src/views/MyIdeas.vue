@@ -1,16 +1,21 @@
 <template>
-  <v-container fluid>
+  <v-container fill-height fluid>
     <vue-headful title="My Ideas | Idea Re-Vue" />
     <v-layout
       v-masonry
       transition-duration="1s"
       item-selector=".item"
       class="masonry-container"
-      justify-center
-      align-center
       row
     >
-      <v-flex v-masonry-tile class="item ma-2" v-for="Idea in Ideas" :key="Idea.DocID">
+      <v-row
+        align="center"
+        justify="center"
+        class="item ma-2 align-center justify-center"
+        v-masonry-tile
+        v-for="Idea in Ideas"
+        :key="Idea.DocID"
+      >
         <v-card hover width="320" class="mx-auto">
           <v-card-Title class="title">
             {{ Idea.Title}}
@@ -20,7 +25,7 @@
                 <v-icon v-on="on" v-if="Idea.Completed" class="green--text" small>done_all</v-icon>
                 <v-icon v-on="on" v-else class="orange--text text--lighten-2" small>update</v-icon>
               </template>
-              <span>Tooltip</span>
+              <span>{{Idea.Completed ? "Completed" : "Pending"}}</span>
             </v-tooltip>
           </v-card-Title>
           <v-card-text>{{ Idea.Description }}</v-card-text>
@@ -44,7 +49,7 @@
             </v-menu>
           </v-card-actions>
         </v-card>
-      </v-flex>
+      </v-row>
     </v-layout>
   </v-container>
 </template>
