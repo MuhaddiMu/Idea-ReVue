@@ -1,20 +1,41 @@
 <template>
-  <v-container fill-height fluid>
+  <v-container>
     <vue-headful title="My Ideas | Idea Re-Vue" />
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn v-on="on" fab depressed>
+          <v-icon>filter_list</v-icon>
+        </v-btn>
+      </template>
+      <span>Sort by Completed</span>
+    </v-tooltip>
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn v-on="on" fab depressed>
+          <v-icon>calendar_today</v-icon>
+        </v-btn>
+      </template>
+      <span>Sort by Date</span>
+    </v-tooltip>
+
     <v-layout
       v-masonry
       transition-duration="1s"
       item-selector=".item"
       class="masonry-container"
-      row
+      justify-center
     >
-      <v-row
+      <v-flex
         align="center"
         justify="center"
         class="item ma-2 align-center justify-center"
         v-masonry-tile
         v-for="Idea in Ideas"
         :key="Idea.DocID"
+        xs12
+        md4
       >
         <v-card hover width="320" class="mx-auto">
           <v-card-Title class="title">
@@ -49,7 +70,7 @@
             </v-menu>
           </v-card-actions>
         </v-card>
-      </v-row>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
