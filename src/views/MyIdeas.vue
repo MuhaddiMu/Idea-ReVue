@@ -4,7 +4,7 @@
 
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" fab depressed>
+        <v-btn small v-on="on" fab depressed>
           <v-icon>filter_list</v-icon>
         </v-btn>
       </template>
@@ -13,22 +13,25 @@
 
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn v-on="on" fab depressed>
+        <v-btn small v-on="on" fab depressed>
           <v-icon>calendar_today</v-icon>
         </v-btn>
       </template>
       <span>Sort by Completed</span>
     </v-tooltip>
 
-    <v-row class="justify-center">
-      <v-flex v-for="x in 3" xs3 :key="x">
-        <vue-content-loading :width="300" :height="130">
-          <rect x="70" y="15" rx="4" ry="4" width="117" height="6.4" />
-          <rect x="70" y="35" rx="3" ry="3" width="85" height="6.4" />
-          <rect x="0" y="80" rx="3" ry="3" width="350" height="6.4" />
-          <rect x="0" y="100" rx="3" ry="3" width="380" height="6.4" />
-          <rect x="0" y="120" rx="3" ry="3" width="201" height="6.4" />
-          <circle cx="30" cy="30" r="30" />
+    <v-row v-if="!Ideas" class="justify-center">
+      <v-flex class="ma-2" v-for="x in 3" xs3 :key="x">
+        <vue-content-loading primary="#f3f3f3" secondary="#ecebeb" :width="300" :height="130">
+          <rect x="6.72" y="8" rx="4" ry="4" width="243.73" height="13.02" />
+          <rect x="361" y="95" rx="3" ry="3" width="141.95" height="10.02" />
+          <rect x="10" y="36" rx="3" ry="3" width="270" height="6" />
+          <rect x="10" y="53" rx="3" ry="3" width="270" height="6" />
+          <rect x="5" y="99" rx="3" ry="3" width="230" height="6.84" />
+          <rect x="10" y="70" rx="3" ry="3" width="270" height="6" />
+          <rect x="5" y="115" rx="3" ry="3" width="180" height="6" />
+          <circle cx="284.48" cy="110.92" r="12.25" />
+          <circle cx="283.48" cy="14.92" r="12.25" />
         </vue-content-loading>
       </v-flex>
     </v-row>
@@ -102,7 +105,7 @@ export default {
 
   data() {
     return {
-      Ideas: [],
+      Ideas: null,
 
       Options: [
         { Title: "Edit" },
@@ -120,6 +123,10 @@ export default {
         .where("AddedBy", "==", this.$store.getters.getUser.uid)
         .get()
         .then(function (querySnapshot) {
+
+          self.Ideas = []
+
+
           querySnapshot.forEach(function (doc) {
             var DocData = doc.data()
             DocData.DocID = doc.id
