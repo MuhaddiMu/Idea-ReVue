@@ -1,10 +1,10 @@
 <template>
-  <v-container>
+  <v-container fill-height grid-list-md>
     <vue-headful title="My Ideas | Idea Re-Vue" />
 
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn small v-on="on" fab depressed>
+        <v-btn @click="SortByComp" small v-on="on" fab depressed>
           <v-icon>filter_list</v-icon>
         </v-btn>
       </template>
@@ -13,7 +13,7 @@
 
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn small v-on="on" fab depressed>
+        <v-btn @click="SortByDate" small v-on="on" fab depressed>
           <v-icon>calendar_today</v-icon>
         </v-btn>
       </template>
@@ -36,60 +36,60 @@
       </v-flex>
     </v-row>
 
-    <v-row class="justify-center">
-      <v-layout
-        v-masonry
-        transition-duration="1s"
-        item-selector=".item"
-        class="masonry-container"
-        justify-center
+    <v-layout
+      v-masonry
+      transition-duration="1s"
+      item-selector=".item"
+      class="masonry-container"
+      justify-center
+      row
+      align-center
+    >
+      <v-flex
+        align="center"
+        justify="center"
+        class="item align-center justify-center"
+        v-masonry-tile
+        v-for="Idea in Ideas"
+        :key="Idea.DocID"
+        xs12
+        md4
       >
-        <v-flex
-          align="center"
-          justify="center"
-          class="item ma-2 align-center justify-center"
-          v-masonry-tile
-          v-for="Idea in Ideas"
-          :key="Idea.DocID"
-          xs12
-          md4
-        >
-          <v-card hover width="320" class="mx-auto">
-            <v-card-Title class="title">
-              {{ Idea.Title}}
-              <v-spacer></v-spacer>
-              <v-tooltip right>
-                <template v-slot:activator="{ on }">
-                  <v-icon v-on="on" v-if="Idea.Completed" class="green--text" small>done_all</v-icon>
-                  <v-icon v-on="on" v-else class="orange--text text--lighten-2" small>update</v-icon>
-                </template>
-                <span>{{Idea.Completed ? "Completed" : "Pending"}}</span>
-              </v-tooltip>
-            </v-card-Title>
-            <v-card-text>{{ Idea.Description }}</v-card-text>
+        <v-card hover width="320" class="mx-auto">
+          <v-card-Title class="title">
+            {{ Idea.Title}}
+            <v-spacer></v-spacer>
+            <v-tooltip right>
+              <template v-slot:activator="{ on }">
+                <v-icon v-on="on" v-if="Idea.Completed" class="green--text" small>done_all</v-icon>
+                <v-icon v-on="on" v-else class="orange--text text--lighten-2" small>update</v-icon>
+              </template>
+              <span>{{Idea.Completed ? "Completed" : "Pending"}}</span>
+            </v-tooltip>
+          </v-card-Title>
+          <v-card-text>{{ Idea.Description }}</v-card-text>
 
-            <v-card-actions class="caption grey--text text--darken-3">
-              Added on: {{ Idea.Added }}
-              <br />
-              Visibility: {{ Idea.Visibility }}
-              <v-spacer></v-spacer>
-              <v-menu nudge-top="6" top offset-x>
-                <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on">
-                    <v-icon>more_vert</v-icon>
-                  </v-btn>
-                </template>
-                <v-list>
-                  <v-list-item v-for="(Option, i) in Options" :key="i">
-                    <v-list-item-title>{{ Option.Title }}</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-row>
+          <v-card-actions class="caption grey--text text--darken-3">
+            Added on: {{ Idea.Added }}
+            <br />
+            Visibility: {{ Idea.Visibility }}
+            <v-spacer></v-spacer>
+            <v-menu nudge-top="6" top offset-x>
+              <template v-slot:activator="{ on }">
+                <v-btn icon v-on="on">
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item v-for="(Option, i) in Options" :key="i">
+                  <v-list-item-title>{{ Option.Title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 IDEARE
@@ -136,7 +136,10 @@ export default {
         .catch(function (error) {
           console.log("Error getting documents: ", error)
         });
-    }
+    },
+    SortByComp() { },
+    SortByDate() { },
+
   },
   created() {
     this.GetIdeas();
