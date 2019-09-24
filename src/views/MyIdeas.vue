@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height grid-list-md>
+  <v-container grid-list-md>
     <vue-headful title="My Ideas | Idea Re-Vue" />
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
@@ -22,12 +22,7 @@
     <v-row v-if="!Ideas" class="justify-center">
       <v-flex class="ma-2" v-for="x in 3" xs3 :key="x">
         <v-card hover width="320" class="mx-auto">
-          <vue-content-loading
-            primary="#f3f3f3"
-            secondary="#ecebeb"
-            :width="300"
-            :height="130"
-          >
+          <vue-content-loading primary="#f3f3f3" secondary="#ecebeb" :width="300" :height="130">
             <rect x="6.72" y="8" rx="4" ry="4" width="243.73" height="13.02" />
             <rect x="361" y="95" rx="3" ry="3" width="141.95" height="10.02" />
             <rect x="10" y="36" rx="3" ry="3" width="270" height="6" />
@@ -67,20 +62,8 @@
             <v-spacer></v-spacer>
             <v-tooltip right>
               <template v-slot:activator="{ on }">
-                <v-icon
-                  v-on="on"
-                  v-if="Idea.Completed"
-                  class="green--text"
-                  small
-                  >done_all</v-icon
-                >
-                <v-icon
-                  v-on="on"
-                  v-else
-                  class="orange--text text--lighten-2"
-                  small
-                  >update</v-icon
-                >
+                <v-icon v-on="on" v-if="Idea.Completed" class="green--text" small>done_all</v-icon>
+                <v-icon v-on="on" v-else class="orange--text text--lighten-2" small>update</v-icon>
               </template>
               <span>{{ Idea.Completed ? "Completed" : "Pending" }}</span>
             </v-tooltip>
@@ -139,16 +122,16 @@ export default {
         .collection("Ideas")
         .where("AddedBy", "==", this.$store.getters.getUser.uid)
         .get()
-        .then(function(querySnapshot) {
+        .then(function (querySnapshot) {
           self.Ideas = []
 
-          querySnapshot.forEach(function(doc) {
+          querySnapshot.forEach(function (doc) {
             var DocData = doc.data()
             DocData.DocID = doc.id
             self.Ideas.push(DocData)
           })
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("Error getting documents: ", error)
         })
     },
@@ -165,7 +148,7 @@ export default {
         this.Ideas = UpdatedIdeas
       }, 1)
     },
-    SortByDate() {}
+    SortByDate() { }
   },
   created() {
     this.GetIdeas()
