@@ -19,6 +19,15 @@
       <span>Sort by Date</span>
     </v-tooltip>
 
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn @click="GetIdeas" small v-on="on" fab depressed>
+          <v-icon>refresh</v-icon>
+        </v-btn>
+      </template>
+      <span>Refresh</span>
+    </v-tooltip>
+
     <v-row v-if="!Ideas" class="justify-center">
       <v-flex class="ma-2" v-for="x in 3" xs3 :key="x">
         <v-card hover width="320" class="mx-auto">
