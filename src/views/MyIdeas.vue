@@ -16,7 +16,7 @@
           <v-icon>calendar_today</v-icon>
         </v-btn>
       </template>
-      <span>Sort by Completed</span>
+      <span>Sort by Date</span>
     </v-tooltip>
 
     <v-row v-if="!Ideas" class="justify-center">
@@ -97,6 +97,8 @@
 import firebase from "../firebase"
 import store from "../store"
 import VueContentLoading from "vue-content-loading"
+import moment from "moment";
+
 
 export default {
   components: {
@@ -146,9 +148,24 @@ export default {
 
       setTimeout(() => {
         this.Ideas = UpdatedIdeas
-      }, 1)
+      }, .1)
     },
-    SortByDate() { }
+    SortByDate() {
+
+
+      let UpdatedIdeas = this.Ideas.sort((A, B) => {
+        var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
+        var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
+        return C - D
+      })
+
+      this.Ideas = {}
+
+      setTimeout(() => {
+        this.Ideas = UpdatedIdeas
+      }, .1)
+
+    }
   },
   created() {
     this.GetIdeas()
