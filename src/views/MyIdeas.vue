@@ -2,7 +2,7 @@
   <v-container grid-list-md>
     <vue-headful title="My Ideas | Idea Re-Vue" />
     <v-tooltip bottom>
-      <template v-slot:activator="{ on }">
+      <template v-if="Ideas" v-slot:activator="{ on }">
         <v-btn @click="SortByComp" small v-on="on" fab depressed>
           <v-icon>filter_list</v-icon>
         </v-btn>
@@ -12,16 +12,16 @@
 
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
-        <v-btn @click="SortByDate" small v-on="on" fab depressed>
+        <v-btn v-if="Ideas" @click="SortByDate" small v-on="on" fab depressed>
           <v-icon>calendar_today</v-icon>
         </v-btn>
       </template>
       <span>Sort by Date</span>
     </v-tooltip>
 
-    <v-tooltip bottom>
+    <v-tooltip v-if="Ideas" bottom>
       <template v-slot:activator="{ on }">
-        <v-btn @click="GetIdeas" small v-on="on" fab depressed>
+        <v-btn :loading="Loading" @click="GetIdeas" small v-on="on" fab depressed>
           <v-icon>refresh</v-icon>
         </v-btn>
       </template>
@@ -117,6 +117,7 @@ export default {
   data() {
     return {
       Ideas: null,
+      Loading: false,
 
       Options: [
         { Title: "Edit" },
@@ -128,6 +129,7 @@ export default {
   methods: {
     GetIdeas() {
       let self = this
+      self.Loading = true
       firebase.firebase
         .firestore()
         .collection("Ideas")
@@ -140,6 +142,7 @@ export default {
             var DocData = doc.data()
             DocData.DocID = doc.id
             self.Ideas.push(DocData)
+            self.Loading = false
           })
         })
         .catch(function (error) {
