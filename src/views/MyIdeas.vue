@@ -91,9 +91,13 @@
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item v-for="(Option, i) in Options" :key="i">
-                  <v-list-item-title>{{ Option.Title }}</v-list-item-title>
-                </v-list-item>
+                <v-list-item-group color="primary">
+                  <v-list-item v-for="(Option, i) in Options" :key="i">
+                    <v-list-item-content @click="TriggerClick(Option.Func, Idea.DocID)">
+                      <v-list-item-title v-text="Option.Title"></v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list-item-group>
               </v-list>
             </v-menu>
           </v-card-actions>
@@ -120,9 +124,9 @@ export default {
       Loading: false,
 
       Options: [
-        { Title: "Edit" },
-        { Title: "Mark as Completed" },
-        { Title: "Delete" }
+        { Title: "Edit", Func: "Edit" },
+        { Title: "Mark as Completed", Func: "MarkDone" },
+        { Title: "Delete", Func: "Delete" }
       ]
     }
   },
@@ -177,7 +181,52 @@ export default {
         this.Ideas = UpdatedIdeas
       }, .1)
 
-    }
+    },
+
+    TriggerClick(FuncName, IdeaID) {
+
+      if (FuncName === "Edit") {
+        this.Edit()
+
+      }
+
+      if (FuncName === "Delete") {
+        this.Delete()
+
+      }
+
+      if (FuncName === "MarkDone") {
+        this.MarkDone(IdeaID)
+
+      }
+
+    },
+
+    Edit() {
+
+      console.log('Edit');
+
+    },
+
+    Delete() {
+
+      console.log('Delete');
+
+    },
+    MarkDone(IdeaID) {
+
+      let self = this
+
+      var MarkAsDone = firebase.firebase.firestore().collection('Ideas').doc(IdeaID)
+
+      MarkAsDone.update({
+        Completed: true
+      }).then(function () {
+          self.GetIdeas()
+        }).catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+    },
   },
   created() {
     this.GetIdeas()
