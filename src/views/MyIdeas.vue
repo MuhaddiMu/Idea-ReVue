@@ -46,6 +46,8 @@
       </v-flex>
     </v-row>
 
+    <EditIdea ref="Idea" />
+
     <v-layout
       v-masonry
       transition-duration="1s"
@@ -92,8 +94,12 @@
               </template>
               <v-list>
                 <v-list-item-group color="primary">
-                  <v-list-item v-for="(Option, i) in Options" :key="i">
-                    <v-list-item-content @click="TriggerClick(Option.Func, Idea.DocID)">
+                  <v-list-item
+                    v-for="(Option, i) in Options"
+                    :key="i"
+                    @click="TriggerClick(Option.Func, Idea.DocID)"
+                  >
+                    <v-list-item-content>
                       <v-list-item-title v-text="Option.Title"></v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
@@ -107,6 +113,7 @@
   </v-container>
 </template>
 <script>
+import EditIdea from "./EditIdea"
 import firebase from "../firebase"
 import store from "../store"
 import VueContentLoading from "vue-content-loading"
@@ -115,7 +122,8 @@ import moment from "moment";
 
 export default {
   components: {
-    VueContentLoading
+    VueContentLoading,
+    EditIdea
   },
 
   data() {
@@ -186,12 +194,12 @@ export default {
     TriggerClick(FuncName, IdeaID) {
 
       if (FuncName === "Edit") {
-        this.Edit()
+        this.Edit(IdeaID)
 
       }
 
       if (FuncName === "Delete") {
-        this.Delete()
+        this.Delete(IdeaID)
 
       }
 
@@ -202,10 +210,9 @@ export default {
 
     },
 
-    Edit() {
+    Edit(IdeaID) {
 
-      console.log('Edit');
-
+      this.$refs.Idea.ShowModal(IdeaID);
     },
 
     Delete() {
@@ -222,10 +229,10 @@ export default {
       MarkAsDone.update({
         Completed: true
       }).then(function () {
-          self.GetIdeas()
-        }).catch(function (error) {
-          console.error('Error writing document: ', error)
-        })
+        self.GetIdeas()
+      }).catch(function (error) {
+        console.error('Error writing document: ', error)
+      })
     },
   },
   created() {
