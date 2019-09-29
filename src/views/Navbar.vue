@@ -11,8 +11,8 @@
       <v-toolbar-items class="hidden-sm-and-down">
         <v-tooltip left>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" fab text>
-              <v-icon @click="LoveUpdate" large color="pink">favorite</v-icon>
+            <v-btn @click="LoveUpdate" v-on="on" fab text>
+              <v-icon large color="pink">favorite</v-icon>
             </v-btn>
           </template>
           <span>Show Love By Tapping</span>
