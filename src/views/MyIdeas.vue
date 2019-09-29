@@ -46,7 +46,7 @@
       </v-flex>
     </v-row>
 
-    <EditIdea ref="Idea" />
+    <EditIdea @UpdateIdeas="GetIdeas" ref="Idea" />
 
     <v-layout
       v-masonry
