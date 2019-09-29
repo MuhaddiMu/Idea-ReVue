@@ -1,6 +1,10 @@
 <template>
   <v-container grid-list-md>
     <vue-headful title="My Ideas | Idea Re-Vue" />
+    <v-snackbar v-model="Snackbar" top>
+      {{ SnackbarMsg }}
+      <v-btn color="pink" text @click="Snackbar = false">Close</v-btn>
+    </v-snackbar>
     <v-tooltip bottom>
       <template v-if="Ideas" v-slot:activator="{ on }">
         <v-btn @click="SortByComp" small v-on="on" fab depressed>
@@ -47,6 +51,8 @@
     </v-row>
 
     <EditIdea @UpdateIdeas="GetIdeas" ref="Idea" />
+
+    <DeleteIdea @ConfirmDelete="ConfirmDelete" ref="DeleteIdea" />
 
     <v-layout
       v-masonry
@@ -114,6 +120,7 @@
 </template>
 <script>
 import EditIdea from "./EditIdea"
+import DeleteIdea from "./DeleteIdea"
 import firebase from "../firebase"
 import store from "../store"
 import VueContentLoading from "vue-content-loading"
@@ -123,6 +130,7 @@ import moment from "moment";
 export default {
   components: {
     VueContentLoading,
+    DeleteIdea,
     EditIdea
   },
 
@@ -130,6 +138,8 @@ export default {
     return {
       Ideas: null,
       Loading: false,
+      Snackbar: false,
+      SnackbarMsg: "",
 
       Options: [
         { Title: "Edit", Func: "Edit" },
@@ -150,11 +160,11 @@ export default {
         .then(function (querySnapshot) {
           self.Ideas = []
 
+          self.Loading = false
           querySnapshot.forEach(function (doc) {
             var DocData = doc.data()
             DocData.DocID = doc.id
             self.Ideas.push(DocData)
-            self.Loading = false
           })
         })
         .catch(function (error) {
@@ -215,11 +225,21 @@ export default {
       this.$refs.Idea.ShowModal(IdeaID);
     },
 
-    Delete() {
-
-      console.log('Delete');
-
+    Delete(IdeaID) {
+      this.$refs.DeleteIdea.ShowModal(IdeaID);
     },
+
+    ConfirmDelete(IdeaID) {
+      let self = this
+      firebase.firebase.firestore().collection('Ideas').doc(IdeaID).delete().then(function () {
+        self.Snackbar = true
+        self.SnackbarMsg = "Idea Deleted Successfully"
+        self.GetIdeas()
+      }).catch(function (error) {
+        console.error("Error removing document: ", error);
+      });
+    },
+
     MarkDone(IdeaID) {
 
       let self = this
