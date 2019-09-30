@@ -56,7 +56,7 @@
         </v-card>
       </v-flex>
     </v-layout>
-    
+
     <v-layout
       v-masonry
       transition-duration="1s"
@@ -158,7 +158,7 @@ export default {
         }
       })
 
-      this.Ideas = {}
+      this.Ideas = []
 
       setTimeout(() => {
         this.Ideas = UpdatedIdeas
@@ -166,19 +166,14 @@ export default {
     },
     SortByDate() {
 
+      this.Ideas = []
 
+      this.GetIdeas()
       let UpdatedIdeas = this.Ideas.sort((A, B) => {
         var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
-        return C - D
+        return D - C
       })
-
-      this.Ideas = {}
-
-      setTimeout(() => {
-        this.Ideas = UpdatedIdeas
-      }, .1)
-
     },
 
   },

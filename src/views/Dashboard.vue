@@ -1,12 +1,12 @@
 <template>
-  <v-container>
+  <v-container v-if="Total">
     <vue-headful title="Dashboard | Idea Re-Vue" />
     <v-layout align-center justify-center row wrap>
       <v-flex xs12 md12>
         <v-card class="ma-1" text justify-center dark>
           <v-card-text
             class="text-center display-1 TotalIdeas white--text"
-          >You Have Total 10 Ideas, Explore More...</v-card-text>
+          >You Have Total {{Total}} Ideas, Explore More...</v-card-text>
         </v-card>
       </v-flex>
       <v-flex xs12 md3>
@@ -66,15 +66,34 @@
 <script>
 import Idea from "./Idea";
 import router from "../router"
+import firebase from "../firebase"
 export default {
   components: {
     Idea
   },
 
   data() {
-    return {};
+    return {
+      Total: ''
+    };
   },
   methods: {
+
+    TotalIdeas() {
+      let self = this
+      firebase.firebase
+        .firestore()
+        .collection("Ideas")
+        .where("AddedBy", "==", this.$store.getters.getUser.uid)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.docs.length ? self.Total = querySnapshot.docs.length : self.Total = "0"
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error)
+        })
+    },
+
     RedirectPublic() {
       this.$router.push('/Public')
 
@@ -83,6 +102,9 @@ export default {
     ShowIdeaModal() {
       this.$refs.Idea.ShowModal();
     }
+  },
+  created() {
+    this.TotalIdeas()
   }
 };
 </script>

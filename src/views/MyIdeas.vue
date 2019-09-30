@@ -188,27 +188,20 @@ export default {
         }
       })
 
-      this.Ideas = {}
-
       setTimeout(() => {
         this.Ideas = UpdatedIdeas
       }, .1)
     },
     SortByDate() {
 
+      this.Ideas = []
 
+      this.GetIdeas()
       let UpdatedIdeas = this.Ideas.sort((A, B) => {
         var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
-        return C - D
+        return D - C
       })
-
-      this.Ideas = {}
-
-      setTimeout(() => {
-        this.Ideas = UpdatedIdeas
-      }, .1)
-
     },
 
     TriggerClick(FuncName, IdeaID) {
