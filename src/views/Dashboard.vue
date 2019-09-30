@@ -6,7 +6,7 @@
         <v-card class="ma-1" text justify-center dark>
           <v-card-text
             class="text-center display-1 TotalIdeas white--text"
-          >You Have Total 10 Ideas – Explore More</v-card-text>
+          >You Have Total 10 Ideas, Explore More...</v-card-text>
         </v-card>
       </v-flex>
       <v-flex xs12 md3>

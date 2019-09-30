@@ -66,11 +66,18 @@
           <v-list-item-content class="grey--text">Got an Idea?</v-list-item-content>
         </v-list-item>
 
-        <v-list-item to="MyIdeas" v-ripple>
+        <v-list-item to="Ideas" v-ripple>
           <v-list-item-icon>
             <v-icon>stars</v-icon>
           </v-list-item-icon>
           <v-list-item-content class="grey--text">My Ideas</v-list-item-content>
+        </v-list-item>
+
+        <v-list-item to="Public" v-ripple>
+          <v-list-item-icon>
+            <v-icon>public</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content class="grey--text">Public Ideas</v-list-item-content>
         </v-list-item>
 
         <v-list-item @click="ShowModal" v-ripple>
