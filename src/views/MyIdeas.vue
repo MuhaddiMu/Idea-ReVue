@@ -34,8 +34,16 @@
       </v-tooltip>
     </v-flex>
 
-    <v-row v-if="!Ideas" class="justify-center">
-      <v-flex class="ma-2" v-for="x in 3" xs3 :key="x">
+    <v-layout v-if="!Ideas" class="align-center justify-center" justify-center row align-center>
+      <v-flex
+        align="center"
+        justify="center"
+        class="align-center justify-center"
+        v-for="x in 3"
+        :key="x"
+        xs12
+        md3
+      >
         <v-card hover width="320" class="mx-auto">
           <vue-content-loading primary="#f3f3f3" secondary="#ecebeb" :width="300" :height="130">
             <rect x="6.72" y="8" rx="4" ry="4" width="243.73" height="13.02" />
@@ -50,7 +58,7 @@
           </vue-content-loading>
         </v-card>
       </v-flex>
-    </v-row>
+    </v-layout>
 
     <EditIdea @UpdateIdeas="GetIdeas" ref="Idea" />
 
