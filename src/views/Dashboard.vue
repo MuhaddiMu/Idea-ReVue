@@ -36,28 +36,6 @@
           </v-card-actions>
         </v-card>
       </v-flex>
-      <v-flex xs12 md3>
-        <v-card class="VCard ma-1" text justify-center dark color="primary">
-          <v-card-title class="display-1">Completed Ideas</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn depressed text fab>
-              <v-icon>done_all</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 md3>
-        <v-card class="VCard ma-1" text justify-center dark color="primary">
-          <v-card-title class="display-1">Pending Ideas</v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn depressed text fab>
-              <v-icon>update</v-icon>
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
     </v-layout>
     <Idea ref="Idea"></Idea>
   </v-container>

@@ -188,6 +188,8 @@ export default {
         }
       })
 
+      this.Ideas = []
+
       setTimeout(() => {
         this.Ideas = UpdatedIdeas
       }, .1)
