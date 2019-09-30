@@ -5,32 +5,34 @@
       {{ SnackbarMsg }}
       <v-btn color="pink" text @click="Snackbar = false">Close</v-btn>
     </v-snackbar>
-    <v-tooltip bottom>
-      <template v-if="Ideas" v-slot:activator="{ on }">
-        <v-btn @click="SortByComp" small v-on="on" fab depressed>
-          <v-icon>filter_list</v-icon>
-        </v-btn>
-      </template>
-      <span>Sort by Completed</span>
-    </v-tooltip>
+    <v-flex row class="item align-center justify-center">
+      <v-tooltip bottom>
+        <template v-if="Ideas" v-slot:activator="{ on }">
+          <v-btn @click="SortByComp" small v-on="on" fab depressed>
+            <v-icon>filter_list</v-icon>
+          </v-btn>
+        </template>
+        <span>Sort by Completed</span>
+      </v-tooltip>
 
-    <v-tooltip bottom>
-      <template v-slot:activator="{ on }">
-        <v-btn v-if="Ideas" @click="SortByDate" small v-on="on" fab depressed>
-          <v-icon>calendar_today</v-icon>
-        </v-btn>
-      </template>
-      <span>Sort by Date</span>
-    </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn v-if="Ideas" @click="SortByDate" small v-on="on" fab depressed>
+            <v-icon>calendar_today</v-icon>
+          </v-btn>
+        </template>
+        <span>Sort by Date</span>
+      </v-tooltip>
 
-    <v-tooltip v-if="Ideas" bottom>
-      <template v-slot:activator="{ on }">
-        <v-btn :loading="Loading" @click="GetIdeas" small v-on="on" fab depressed>
-          <v-icon>refresh</v-icon>
-        </v-btn>
-      </template>
-      <span>Refresh</span>
-    </v-tooltip>
+      <v-tooltip v-if="Ideas" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn :loading="Loading" @click="GetIdeas" small v-on="on" fab depressed>
+            <v-icon>refresh</v-icon>
+          </v-btn>
+        </template>
+        <span>Refresh</span>
+      </v-tooltip>
+    </v-flex>
 
     <v-row v-if="!Ideas" class="justify-center">
       <v-flex class="ma-2" v-for="x in 3" xs3 :key="x">
