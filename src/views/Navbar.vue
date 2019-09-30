@@ -1,6 +1,11 @@
 <template>
   <nav v-show="Navbar">
     <v-app-bar app>
+      <v-snackbar v-model="LogSuccess" top>
+        Success! Welcome to Dashboard
+        <v-btn color="pink" text @click="LogSuccess = false">Close</v-btn>
+      </v-snackbar>
+
       <v-icon class="grey--text mr-2" @click="Sidebar = !Sidebar">menu</v-icon>
       <v-toolbar-title class="grey--text text-uppercase">
         <span class="title">Idea</span>
@@ -76,10 +81,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-snackbar v-model="LogSuccess" top>
-      Success! Welcome to Dashboard
-      <v-btn color="pink" text @click="LogSuccess = false">Close</v-btn>
-    </v-snackbar>
 
     <Account ref="Account"></Account>
     <Idea ref="Idea"></Idea>

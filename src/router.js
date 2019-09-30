@@ -1,35 +1,44 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Dashboard from "./views/Dashboard.vue";
-import Auth from "./views/Auth.vue";
-import MyIdeas from "./views/MyIdeas.vue";
+import Vue from 'vue'
+import Router from 'vue-router'
+import Dashboard from './views/Dashboard.vue'
+import Auth from './views/Auth.vue'
+import MyIdeas from './views/MyIdeas.vue'
+import PublicIdeas from './views/PublicIdeas'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
-      name: "Dashboard",
+      path: '/',
+      name: 'Dashboard',
       component: Dashboard,
       meta: {
         requiresAuth: true
       }
     },
     {
-      path: "/Auth",
-      name: "Auth",
-      component: Auth,
+      path: '/Auth',
+      name: 'Auth',
+      component: Auth
     },
     {
-      path: "/MyIdeas",
-      name: "MyIdeas",
+      path: '/MyIdeas',
+      name: 'MyIdeas',
       component: MyIdeas,
       meta: {
         requiresAuth: true
       }
     },
+    {
+      path: '/Public',
+      name: 'PublicIdeas',
+      component: PublicIdeas,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
-});
+})
