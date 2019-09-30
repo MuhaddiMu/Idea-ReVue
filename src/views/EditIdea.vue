@@ -96,51 +96,48 @@
 </template>
 
 <script>
-import firebase from "../firebase";
-import store from "../store";
-import moment from "moment";
+import firebase from '../firebase'
+import store from '../store'
+import moment from 'moment'
 export default {
 
-
-  data() {
+  data () {
     return {
       Overflow: false,
-      date: "",
+      date: '',
       DocID: '',
       DateBox: false,
       dialog: false,
       Snackbar: false,
-      SnackbarMsg: "",
+      SnackbarMsg: '',
       Completed: '',
-      MinDate: moment().format("YYYY-MM-DD"),
+      MinDate: moment().format('YYYY-MM-DD'),
       Loading: false,
-      ToBeCompleted: "",
-      Title: "",
-      Description: "",
-      Visibility: "",
+      ToBeCompleted: '',
+      Title: '',
+      Description: '',
+      Visibility: '',
       Rules: {
-        Title: value => !!value || "Required.",
-        ToBeCompleted: value => !!value || "Required.",
-        Visibility: value => !!value || "Required.",
-        Date: value => !!value || "Required."
+        Title: value => !!value || 'Required.',
+        ToBeCompleted: value => !!value || 'Required.',
+        Visibility: value => !!value || 'Required.',
+        Date: value => !!value || 'Required.'
       }
-    };
+    }
   },
 
   methods: {
-    ShowModal(IdeaID) {
+    ShowModal (IdeaID) {
       this.Overflow = true
       this.FetchIdea(IdeaID)
     },
 
-    FetchIdea(IdeaID) {
-
+    FetchIdea (IdeaID) {
       let self = this
-      const ID = IdeaID;
+      const ID = IdeaID
 
       const ThisIdea = firebase.firebase.firestore().collection('Ideas').doc(ID).get().then(function (doc) {
         if (doc.exists) {
-
           self.Title = doc.data().Title
           self.Description = doc.data().Description
           self.date = moment(doc.data().ToBeCompleted, 'Do MMMM YYYY').format('YYYY-MM-DD')
@@ -153,10 +150,10 @@ export default {
       })
     },
 
-    UpdateIdea() {
-      let self = this;
+    UpdateIdea () {
+      let self = this
       if (this.$refs.Form.validate()) {
-        this.Loading = true;
+        this.Loading = true
 
         const ThisIdea = firebase.firebase.firestore().collection('Ideas').doc(self.DocID)
         ThisIdea.update({
@@ -165,27 +162,27 @@ export default {
           Description: self.Description,
           Title: self.Title,
           ToBeCompleted: self.computedDateFormattedMomentjs,
-          Visibility: self.Visibility,
+          Visibility: self.Visibility
 
         }).then(function (Idea) {
           self.$emit('UpdateIdeas')
-          self.Loading = false;
-          self.dialog = false;
-          self.SnackbarMsg = "Idea Updated!";
-          self.Snackbar = true;
-          self.$refs.Form.resetValidation();
-          self.Title = self.Description = self.Visibility = self.date = "";
+          self.Loading = false
+          self.dialog = false
+          self.SnackbarMsg = 'Idea Updated!'
+          self.Snackbar = true
+          self.$refs.Form.resetValidation()
+          self.Title = self.Description = self.Visibility = self.date = ''
         })
-          .catch(function (error) { });
+          .catch(function (error) { })
       }
     }
   },
   computed: {
-    computedDateFormattedMomentjs() {
-      return this.date ? moment(this.date).format("Do MMMM YYYY") : "";
-    },
-  },
-};
+    computedDateFormattedMomentjs () {
+      return this.date ? moment(this.date).format('Do MMMM YYYY') : ''
+    }
+  }
+}
 </script>
 
 <style scoped>

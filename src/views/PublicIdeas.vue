@@ -104,30 +104,29 @@
   </v-container>
 </template>
 <script>
-import firebase from "../firebase"
-import VueContentLoading from "vue-content-loading"
-import moment from "moment";
-
+import firebase from '../firebase'
+import VueContentLoading from 'vue-content-loading'
+import moment from 'moment'
 
 export default {
   components: {
-    VueContentLoading,
+    VueContentLoading
   },
 
-  data() {
+  data () {
     return {
       Ideas: null,
       Loading: false
     }
   },
   methods: {
-    GetIdeas() {
+    GetIdeas () {
       let self = this
       self.Loading = true
       firebase.firebase
         .firestore()
-        .collection("Ideas")
-        .where("Visibility", "==", "Public")
+        .collection('Ideas')
+        .where('Visibility', '==', 'Public')
         .get()
         .then(function (querySnapshot) {
           self.Ideas = []
@@ -139,19 +138,19 @@ export default {
 
             let UserID = doc.data().AddedBy
 
-            const User = firebase.firebase.firestore().collection("Users").doc(UserID)
-            User.get().then(UserDetails => {            DocData.UserName = UserDetails.data().Name
+            const User = firebase.firebase.firestore().collection('Users').doc(UserID)
+            User.get().then(UserDetails => {
+              DocData.UserName = UserDetails.data().Name
               self.Ideas.push(DocData)
             })
-
           })
         })
         .catch(function (error) {
-          console.log("Error getting documents: ", error)
+          console.log('Error getting documents: ', error)
         })
     },
 
-    SortByComp() {
+    SortByComp () {
       let UpdatedIdeas = this.Ideas.sort((a, b) => {
         if (a.Completed > b.Completed) {
           return -1
@@ -162,10 +161,9 @@ export default {
 
       setTimeout(() => {
         this.Ideas = UpdatedIdeas
-      }, .1)
+      }, 0.1)
     },
-    SortByDate() {
-
+    SortByDate () {
       this.Ideas = []
 
       this.GetIdeas()
@@ -174,10 +172,10 @@ export default {
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         return D - C
       })
-    },
+    }
 
   },
-  created() {
+  created () {
     this.GetIdeas()
   }
 }

@@ -18,23 +18,22 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       Dialog: false,
-      IdeaID: '',
+      IdeaID: ''
     }
   },
 
   methods: {
-    ShowModal(IdeaID) {
+    ShowModal (IdeaID) {
       this.Dialog = true
       this.IdeaID = IdeaID
     },
 
-    ConfirmDelete(IdeaID) {
-       this.$emit('ConfirmDelete', IdeaID)
-       this.Dialog = false
-
+    ConfirmDelete (IdeaID) {
+      this.$emit('ConfirmDelete', IdeaID)
+      this.Dialog = false
     }
   }
 }

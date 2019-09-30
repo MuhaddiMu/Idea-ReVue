@@ -95,71 +95,69 @@
 </template>
 
 <script>
-import firebase from '../firebase';
-import store from '../store';
-import Account from './Account';
-import Idea from './Idea';
+import firebase from '../firebase'
+import store from '../store'
+import Account from './Account'
+import Idea from './Idea'
 export default {
 
   components: {
     Account,
-    Idea,
+    Idea
   },
 
-  data() {
+  data () {
     return {
       Sidebar: false,
       Navbar: false,
-      LogSuccess: false,
+      LogSuccess: false
     }
   },
   methods: {
-    LogOut() {
+    LogOut () {
       const AUTH = firebase.firebase.auth()
       AUTH.signOut().then(() => {
-        this.$router.replace('/Auth');
-      });
+        this.$router.replace('/Auth')
+      })
     },
-    ShowModal() {
-      this.$refs.Account.ShowModal();
-    },
-
-    ShowIdeaModal() {
-      this.$refs.Idea.ShowModal();
+    ShowModal () {
+      this.$refs.Account.ShowModal()
     },
 
-    LoveUpdate() {
-      this.$store.dispatch('UpdateLoveCount');
+    ShowIdeaModal () {
+      this.$refs.Idea.ShowModal()
+    },
+
+    LoveUpdate () {
+      this.$store.dispatch('UpdateLoveCount')
     }
   },
   computed: {
 
-    LoveCount() {
-      return this.$store.state.LoveCount;
+    LoveCount () {
+      return this.$store.state.LoveCount
     },
 
-    UserName() {
-      return this.$store.getters.GetUserName;
+    UserName () {
+      return this.$store.getters.GetUserName
     },
 
-    Email() {
+    Email () {
       return this.$store.getters.getUser.email
     }
 
   },
 
-  created() {
-
-    this.$store.dispatch('SetLoveCount');
+  created () {
+    this.$store.dispatch('SetLoveCount')
 
     if (this.$store.getters.getUser) {
-      this.Navbar = true;
+      this.Navbar = true
     }
     setTimeout(() => {
       this.LogSuccess = true
-    }, 2000);
-  },
-
+    }, 2000)
+  }
 
 }
 </script>

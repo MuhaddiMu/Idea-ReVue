@@ -42,49 +42,48 @@
 </template>
 
 <script>
-import Idea from "./Idea";
-import router from "../router"
-import firebase from "../firebase"
+import Idea from './Idea'
+import router from '../router'
+import firebase from '../firebase'
 export default {
   components: {
     Idea
   },
 
-  data() {
+  data () {
     return {
       Total: ''
-    };
+    }
   },
   methods: {
 
-    TotalIdeas() {
+    TotalIdeas () {
       let self = this
       firebase.firebase
         .firestore()
-        .collection("Ideas")
-        .where("AddedBy", "==", this.$store.getters.getUser.uid)
+        .collection('Ideas')
+        .where('AddedBy', '==', this.$store.getters.getUser.uid)
         .get()
         .then(function (querySnapshot) {
-          querySnapshot.docs.length ? self.Total = querySnapshot.docs.length : self.Total = "0"
+          querySnapshot.docs.length ? self.Total = querySnapshot.docs.length : self.Total = '0'
         })
         .catch(function (error) {
-          console.log("Error getting documents: ", error)
+          console.log('Error getting documents: ', error)
         })
     },
 
-    RedirectPublic() {
+    RedirectPublic () {
       this.$router.push('/Public')
-
     },
 
-    ShowIdeaModal() {
-      this.$refs.Idea.ShowModal();
+    ShowIdeaModal () {
+      this.$refs.Idea.ShowModal()
     }
   },
-  created() {
+  created () {
     this.TotalIdeas()
   }
-};
+}
 </script>
 
 <style scoped>
@@ -96,4 +95,3 @@ export default {
   background: linear-gradient(40deg, #45cafc, #303f9f) !important;
 }
 </style>
-

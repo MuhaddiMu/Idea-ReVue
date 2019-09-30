@@ -40,7 +40,6 @@
 				</v-form>
 			</v-card>
 
-
 			<v-card v-else>
 				<vue-headful title="Update Password | Idea Re-Vue"/>
 				<v-form ref="Form">
@@ -81,112 +80,112 @@
 
 <script>
 import firebase from '../firebase'
-import store from '../store';
+import store from '../store'
 export default {
-	data() {
-		return {
-			dialog: false,
-			Pass: false,
-			Snackbar: false,
-			SnackbarMsg: '',
-			CurPass: '',
-			CurrentEmail: '',
-			PassDialogue: false,
-			NewPass: '',
-			Loading: false,
+  data () {
+    return {
+      dialog: false,
+      Pass: false,
+      Snackbar: false,
+      SnackbarMsg: '',
+      CurPass: '',
+      CurrentEmail: '',
+      PassDialogue: false,
+      NewPass: '',
+      Loading: false,
 
-			rules: {
-				NameReq: value => !!value || 'Required.',
-				PassRequired: value => !!value || 'Required.',
-				PassMin: v => v.length >= 8 || 'Min 8 characters',
-				EmailRequired: v => !!v || 'E-mail is required',
-				EmailValid: v => /.+@.+/.test(v) || 'E-mail must be valid'
-			},
-		}
-	},
+      rules: {
+        NameReq: value => !!value || 'Required.',
+        PassRequired: value => !!value || 'Required.',
+        PassMin: v => v.length >= 8 || 'Min 8 characters',
+        EmailRequired: v => !!v || 'E-mail is required',
+        EmailValid: v => /.+@.+/.test(v) || 'E-mail must be valid'
+      }
+    }
+  },
 
-	methods: {
-		ShowModal() {
-			this.dialog = true;
-		},
+  methods: {
+    ShowModal () {
+      this.dialog = true
+    },
 
-		UpdateProfile() {
-			let self = this
-			var Email = this.$store.state.UserEmail;
-			if (this.$refs.Form.validate()) {
-				this.Loading = true;
-				firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass).then(function(User) {
-					User.user.updateEmail(Email).then(function() {
-						self.Loading = false
-						self.dialog = false
-						self.Snackbar = true
-						self.SnackbarMsg = "Profile Updated"
-						self.CurPass = self.CurrentEmail = ''
-						self.$refs.Form.resetValidation()
-					}).catch(function(error) {
-						self.Loading = false
-						self.Snackbar = true
-						self.SnackbarMsg = error.message
-					});
-				}).catch(function(error) {
-					self.Loading = false
-					self.Snackbar = true
-					self.SnackbarMsg = error.message
-				});
-			}
-		},
+    UpdateProfile () {
+      let self = this
+      var Email = this.$store.state.UserEmail
+      if (this.$refs.Form.validate()) {
+        this.Loading = true
+        firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass).then(function (User) {
+          User.user.updateEmail(Email).then(function () {
+            self.Loading = false
+            self.dialog = false
+            self.Snackbar = true
+            self.SnackbarMsg = 'Profile Updated'
+            self.CurPass = self.CurrentEmail = ''
+            self.$refs.Form.resetValidation()
+          }).catch(function (error) {
+            self.Loading = false
+            self.Snackbar = true
+            self.SnackbarMsg = error.message
+          })
+        }).catch(function (error) {
+          self.Loading = false
+          self.Snackbar = true
+          self.SnackbarMsg = error.message
+        })
+      }
+    },
 
-		UpdatePassword() {
-			let self = this
-			if (this.$refs.Form.validate()) {
-				this.Loading = true;
-				firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass).then(function(User) {
-					User.user.updatePassword(self.NewPass).then(function() {
-						self.Loading = false
-						self.Snackbar = true
-						self.dialog = false
-						self.SnackbarMsg = "Password Updated"
-						self.$refs.Form.resetValidation()
-					}).catch(function(error) {
-						self.Loading = false
-						self.Snackbar = true
-						self.SnackbarMsg = error.message
-					});
-				}).catch(function(error) {
-					self.Loading = false
-					self.Snackbar = true
-					self.SnackbarMsg = error.message
-				});
-			}
-		}
+    UpdatePassword () {
+      let self = this
+      if (this.$refs.Form.validate()) {
+        this.Loading = true
+        firebase.firebase.auth().signInWithEmailAndPassword(this.CurrentEmail, this.CurPass).then(function (User) {
+          User.user.updatePassword(self.NewPass).then(function () {
+            self.Loading = false
+            self.Snackbar = true
+            self.dialog = false
+            self.SnackbarMsg = 'Password Updated'
+            self.$refs.Form.resetValidation()
+          }).catch(function (error) {
+            self.Loading = false
+            self.Snackbar = true
+            self.SnackbarMsg = error.message
+          })
+        }).catch(function (error) {
+          self.Loading = false
+          self.Snackbar = true
+          self.SnackbarMsg = error.message
+        })
+      }
+    }
 
-	},
-	computed: {
-		UserName: {
-			get() {
-				return this.$store.getters.GetUserName;
-			},
+  },
+  computed: {
+    UserName: {
+      get () {
+        return this.$store.getters.GetUserName
+      },
 
-			set(value) {
-				this.$store.commit('UpdateUsername', value)
-			}
-		},
+      set (value) {
+        this.$store.commit('UpdateUsername', value)
+      }
+    },
 
-		UserEmail: {
-			get() {
-				return this.$store.state.UserEmail;
-			},
+    UserEmail: {
+      get () {
+        return this.$store.state.UserEmail
+      },
 
-			set(value) {
-				this.$store.commit('UpdateEmail', value)
-			}
+      set (value) {
+        this.$store.commit('UpdateEmail', value)
+      }
 
-		}
-	},
-	created() {
-		this.$store.dispatch('UserName');
-		this.$store.dispatch('UserEmail');
-	}
+    }
+  },
+  created () {
+    this.$store.dispatch('UserName')
+    this.$store.dispatch('UserEmail')
+  }
 }
 </script>
 

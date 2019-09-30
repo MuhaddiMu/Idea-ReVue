@@ -129,13 +129,12 @@
   </v-container>
 </template>
 <script>
-import EditIdea from "./EditIdea"
-import DeleteIdea from "./DeleteIdea"
-import firebase from "../firebase"
-import store from "../store"
-import VueContentLoading from "vue-content-loading"
-import moment from "moment";
-
+import EditIdea from './EditIdea'
+import DeleteIdea from './DeleteIdea'
+import firebase from '../firebase'
+import store from '../store'
+import VueContentLoading from 'vue-content-loading'
+import moment from 'moment'
 
 export default {
   components: {
@@ -144,28 +143,28 @@ export default {
     EditIdea
   },
 
-  data() {
+  data () {
     return {
       Ideas: null,
       Loading: false,
       Snackbar: false,
-      SnackbarMsg: "",
+      SnackbarMsg: '',
 
       Options: [
-        { Title: "Edit", Func: "Edit" },
-        { Title: "Mark as Completed", Func: "MarkDone" },
-        { Title: "Delete", Func: "Delete" }
+        { Title: 'Edit', Func: 'Edit' },
+        { Title: 'Mark as Completed', Func: 'MarkDone' },
+        { Title: 'Delete', Func: 'Delete' }
       ]
     }
   },
   methods: {
-    GetIdeas() {
+    GetIdeas () {
       let self = this
       self.Loading = true
       firebase.firebase
         .firestore()
-        .collection("Ideas")
-        .where("AddedBy", "==", this.$store.getters.getUser.uid)
+        .collection('Ideas')
+        .where('AddedBy', '==', this.$store.getters.getUser.uid)
         .get()
         .then(function (querySnapshot) {
           self.Ideas = []
@@ -178,10 +177,10 @@ export default {
           })
         })
         .catch(function (error) {
-          console.log("Error getting documents: ", error)
+          console.log('Error getting documents: ', error)
         })
     },
-    SortByComp() {
+    SortByComp () {
       let UpdatedIdeas = this.Ideas.sort((a, b) => {
         if (a.Completed > b.Completed) {
           return -1
@@ -192,10 +191,9 @@ export default {
 
       setTimeout(() => {
         this.Ideas = UpdatedIdeas
-      }, .1)
+      }, 0.1)
     },
-    SortByDate() {
-
+    SortByDate () {
       this.Ideas = []
 
       this.GetIdeas()
@@ -206,47 +204,40 @@ export default {
       })
     },
 
-    TriggerClick(FuncName, IdeaID) {
-
-      if (FuncName === "Edit") {
+    TriggerClick (FuncName, IdeaID) {
+      if (FuncName === 'Edit') {
         this.Edit(IdeaID)
-
       }
 
-      if (FuncName === "Delete") {
+      if (FuncName === 'Delete') {
         this.Delete(IdeaID)
-
       }
 
-      if (FuncName === "MarkDone") {
+      if (FuncName === 'MarkDone') {
         this.MarkDone(IdeaID)
-
       }
-
     },
 
-    Edit(IdeaID) {
-
-      this.$refs.Idea.ShowModal(IdeaID);
+    Edit (IdeaID) {
+      this.$refs.Idea.ShowModal(IdeaID)
     },
 
-    Delete(IdeaID) {
-      this.$refs.DeleteIdea.ShowModal(IdeaID);
+    Delete (IdeaID) {
+      this.$refs.DeleteIdea.ShowModal(IdeaID)
     },
 
-    ConfirmDelete(IdeaID) {
+    ConfirmDelete (IdeaID) {
       let self = this
       firebase.firebase.firestore().collection('Ideas').doc(IdeaID).delete().then(function () {
         self.Snackbar = true
-        self.SnackbarMsg = "Idea Deleted Successfully"
+        self.SnackbarMsg = 'Idea Deleted Successfully'
         self.GetIdeas()
       }).catch(function (error) {
-        console.error("Error removing document: ", error);
-      });
+        console.error('Error removing document: ', error)
+      })
     },
 
-    MarkDone(IdeaID) {
-
+    MarkDone (IdeaID) {
       let self = this
 
       var MarkAsDone = firebase.firebase.firestore().collection('Ideas').doc(IdeaID)
@@ -258,9 +249,9 @@ export default {
       }).catch(function (error) {
         console.error('Error writing document: ', error)
       })
-    },
+    }
   },
-  created() {
+  created () {
     this.GetIdeas()
   }
 }

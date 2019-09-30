@@ -96,44 +96,44 @@
 </template>
 
 <script>
-import firebase from "../firebase";
-import store from "../store";
-import moment from "moment";
+import firebase from '../firebase'
+import store from '../store'
+import moment from 'moment'
 export default {
-  data() {
+  data () {
     return {
-      date: "",
+      date: '',
       DateBox: false,
       dialog: false,
       Snackbar: false,
-      SnackbarMsg: "",
-      MinDate: moment().format("YYYY-MM-DD"),
+      SnackbarMsg: '',
+      MinDate: moment().format('YYYY-MM-DD'),
       Loading: false,
-      ToBeCompleted: "",
-      Title: "",
-      Description: "",
-      Visibility: "",
+      ToBeCompleted: '',
+      Title: '',
+      Description: '',
+      Visibility: '',
       Rules: {
-        Title: value => !!value || "Required.",
-        ToBeCompleted: value => !!value || "Required.",
-        Visibility: value => !!value || "Required.",
-        Date: value => !!value || "Required."
+        Title: value => !!value || 'Required.',
+        ToBeCompleted: value => !!value || 'Required.',
+        Visibility: value => !!value || 'Required.',
+        Date: value => !!value || 'Required.'
       }
-    };
+    }
   },
 
   methods: {
-    ShowModal() {
-      this.dialog = true;
+    ShowModal () {
+      this.dialog = true
     },
 
-    SaveIdea() {
-      let self = this;
+    SaveIdea () {
+      let self = this
       if (this.$refs.Form.validate()) {
-        this.Loading = true;
+        this.Loading = true
         firebase.firebase
           .firestore()
-          .collection("Ideas")
+          .collection('Ideas')
           .doc()
           .set({
             Title: this.Title,
@@ -142,26 +142,26 @@ export default {
             Completed: false,
             ToBeCompleted: this.computedDateFormattedMomentjs,
             AddedBy: this.$store.getters.getUser.uid,
-            Added: moment().format("Do MMMM YYYY")
+            Added: moment().format('Do MMMM YYYY')
           })
-          .then(function(Idea) {
-            self.Loading = false;
-            self.dialog = false;
-            self.SnackbarMsg = "Ideated Successfully!";
-            self.Snackbar = true;
-            self.$refs.Form.resetValidation();
-            self.Title = self.Description = self.Visibility = self.date = "";
+          .then(function (Idea) {
+            self.Loading = false
+            self.dialog = false
+            self.SnackbarMsg = 'Ideated Successfully!'
+            self.Snackbar = true
+            self.$refs.Form.resetValidation()
+            self.Title = self.Description = self.Visibility = self.date = ''
           })
-          .catch(function(error) {});
+          .catch(function (error) {})
       }
     }
   },
   computed: {
-    computedDateFormattedMomentjs() {
-      return this.date ? moment(this.date).format("Do MMMM YYYY") : "";
+    computedDateFormattedMomentjs () {
+      return this.date ? moment(this.date).format('Do MMMM YYYY') : ''
     }
   }
-};
+}
 </script>
 
 <style scoped>

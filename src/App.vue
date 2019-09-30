@@ -10,50 +10,49 @@
 </template>
 
 <script>
-import Navbar from "./views/Navbar";
-import WebFontLoader from 'webfontloader';
+import Navbar from './views/Navbar'
+import WebFontLoader from 'webfontloader'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Navbar
   },
-  data() {
+  data () {
     return {
-    };
+    }
   },
   methods: {
     setUser: function () {
-      this.$store.dispatch('SetLoveCount');
-      this.$store.dispatch('setUser');
+      this.$store.dispatch('SetLoveCount')
+      this.$store.dispatch('setUser')
     },
-    setFontLoaded() {
-      this.$emit('font-loaded');
-    },
+    setFontLoaded () {
+      this.$emit('font-loaded')
+    }
   },
-  created() {
-    this.setUser();
+  created () {
+    this.setUser()
 
     WebFontLoader.load({
       google: {
         // Use FVD notation to include families https://github.com/typekit/fvd
-        families: ['Nunito'],
+        families: ['Nunito']
         // Path to stylesheet that defines font-face
       },
-      active: this.setFontLoaded,
-    });
-
+      active: this.setFontLoaded
+    })
   },
   computed: {
-    ShowNavbar() {
+    ShowNavbar () {
       if (this.$store.getters.getUser) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
-  },
-};
+  }
+}
 </script>
 <style lang="scss" >
 $typoOptions: display-4 display-3 display-2 display-1 headline title subtitle-1

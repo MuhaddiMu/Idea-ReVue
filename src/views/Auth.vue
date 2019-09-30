@@ -101,11 +101,11 @@
 </template>
 
 <script>
-import firebase from '../firebase';
+import firebase from '../firebase'
 import router from '../router'
 
 export default {
-  data() {
+  data () {
     return {
       Snackbar: false,
       SnackbarMsg: '',
@@ -121,53 +121,53 @@ export default {
         PassMin: v => v.length >= 8 || 'Min 8 characters',
         EmailRequired: v => !!v || 'E-mail is required',
         EmailValid: v => /.+@.+/.test(v) || 'E-mail must be valid',
-        NameReq: value => !!value || 'Required.',
+        NameReq: value => !!value || 'Required.'
       },
-      Login: true,
+      Login: true
     }
   },
 
   methods: {
-    Register() {
+    Register () {
       if (this.$refs.form.validate()) {
         this.Loading = true
-        const AUTH = firebase.firebase.auth();
+        const AUTH = firebase.firebase.auth()
         AUTH.createUserWithEmailAndPassword(this.RegEmail, this.RegPass).then(user => {
-          firebase.firebase.firestore().collection("Users").doc(user.user.uid).set({
-            Name: this.RegName,
+          firebase.firebase.firestore().collection('Users').doc(user.user.uid).set({
+            Name: this.RegName
           }).then(() => {
             this.Loading = false
             this.$router.replace('/')
-          });
+          })
           this.Loading = false
           this.$router.replace('/')
         },
-          error => {
-            this.SnackbarMsg = error.message;
-            this.Loading = false
-            this.Snackbar = true
-          });
-      }
-    },
-
-    LogIn() {
-      if (this.$refs.form.validate()) {
-        this.Loading = true
-        const AUTH = firebase.firebase.auth();
-        AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then(user => {
-          this.$router.replace('/')
-          this.$eventBus.$emit('Sux');
-          this.Loading = false
-        }, error => {
-          this.SnackbarMsg = error.message;
+        error => {
+          this.SnackbarMsg = error.message
           this.Loading = false
           this.Snackbar = true
-        });
+        })
       }
     },
+
+    LogIn () {
+      if (this.$refs.form.validate()) {
+        this.Loading = true
+        const AUTH = firebase.firebase.auth()
+        AUTH.signInWithEmailAndPassword(this.LoginEmail, this.LoginPassword).then(user => {
+          this.$router.replace('/')
+          this.$eventBus.$emit('Sux')
+          this.Loading = false
+        }, error => {
+          this.SnackbarMsg = error.message
+          this.Loading = false
+          this.Snackbar = true
+        })
+      }
+    }
   },
 
-  created() {
+  created () {
     if (this.$store.getters.getUser) {
       this.$router.replace('/')
     }
