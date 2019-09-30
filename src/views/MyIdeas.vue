@@ -71,7 +71,7 @@
         v-for="Idea in Ideas"
         :key="Idea.DocID"
         xs12
-        md4
+        md3
       >
         <v-card hover width="320" class="mx-auto">
           <v-card-Title class="title">
