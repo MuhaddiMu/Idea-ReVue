@@ -84,7 +84,16 @@ export default new Vuex.Store({
     },
 
     UpdateUsername (state, Username) {
-      state.UserName = Username
+      firebase.firebase
+        .firestore()
+        .collection('Users')
+        .doc(state.user.uid)
+        .update({
+          Name: Username
+        })
+        .then(function () {
+          state.UserName = Username
+        })
     },
 
     UpdateEmail (state, Email) {
