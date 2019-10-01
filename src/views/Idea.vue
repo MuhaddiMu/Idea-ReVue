@@ -1,6 +1,5 @@
 <template>
   <v-layout row justify-center>
-    <vue-headful title="New Idea | Idea Re-Vue" />
     <v-snackbar v-model="Snackbar" top>
       {{ SnackbarMsg }}
       <v-btn color="pink" text @click="Snackbar = false">Close</v-btn>
@@ -14,10 +13,10 @@
           <v-container grid-list-md>
             <v-flex xs12>
               <blockquote>
-                <span class="LeftBorder"
-                  >I write down so many ideas that it hurts my head to come up
-                  with one more. Then I try to write down five more.</span
-                >
+                <span class="LeftBorder">
+                  I write down so many ideas that it hurts my head to come up
+                  with one more. Then I try to write down five more.
+                </span>
                 <cite>– James Altucher</cite>
               </blockquote>
             </v-flex>
@@ -62,11 +61,7 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker
-                    :min="MinDate"
-                    v-model="date"
-                    @change="DateBox = false"
-                  ></v-date-picker>
+                  <v-date-picker :min="MinDate" v-model="date" @change="DateBox = false"></v-date-picker>
                 </v-menu>
               </v-flex>
               <v-flex xs12>
@@ -85,9 +80,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn text @click="dialog = false">Close</v-btn>
-            <v-btn @click="SaveIdea" class="primary" :loading="Loading" text
-              >Save</v-btn
-            >
+            <v-btn @click="SaveIdea" class="primary" :loading="Loading" text>Save</v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -100,7 +93,7 @@ import firebase from '../firebase'
 import store from '../store'
 import moment from 'moment'
 export default {
-  data () {
+  data() {
     return {
       date: '',
       DateBox: false,
@@ -123,11 +116,11 @@ export default {
   },
 
   methods: {
-    ShowModal () {
+    ShowModal() {
       this.dialog = true
     },
 
-    SaveIdea () {
+    SaveIdea() {
       let self = this
       if (this.$refs.Form.validate()) {
         this.Loading = true
@@ -152,12 +145,12 @@ export default {
             self.$refs.Form.resetValidation()
             self.Title = self.Description = self.Visibility = self.date = ''
           })
-          .catch(function (error) {})
+          .catch(function (error) { })
       }
     }
   },
   computed: {
-    computedDateFormattedMomentjs () {
+    computedDateFormattedMomentjs() {
       return this.date ? moment(this.date).format('Do MMMM YYYY') : ''
     }
   }

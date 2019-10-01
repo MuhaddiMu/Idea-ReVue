@@ -113,14 +113,14 @@ export default {
     VueContentLoading
   },
 
-  data () {
+  data() {
     return {
       Ideas: null,
       Loading: false
     }
   },
   methods: {
-    GetIdeas () {
+    GetIdeas() {
       let self = this
       self.Loading = true
       firebase.firebase
@@ -129,9 +129,11 @@ export default {
         .where('Visibility', '==', 'Public')
         .get()
         .then(function (querySnapshot) {
-          self.Ideas = []
 
-          self.Loading = false
+
+          var IdeasWithUsersName = []
+
+
           querySnapshot.forEach(function (doc) {
             var DocData = doc.data()
             DocData.DocID = doc.id
@@ -141,16 +143,18 @@ export default {
             const User = firebase.firebase.firestore().collection('Users').doc(UserID)
             User.get().then(UserDetails => {
               DocData.UserName = UserDetails.data().Name
-              self.Ideas.push(DocData)
+              IdeasWithUsersName.push(DocData)
+              self.Ideas = IdeasWithUsersName
             })
           })
+          self.Loading = false
         })
         .catch(function (error) {
           console.log('Error getting documents: ', error)
         })
     },
 
-    SortByComp () {
+    SortByComp() {
       let UpdatedIdeas = this.Ideas.sort((a, b) => {
         if (a.Completed > b.Completed) {
           return -1
@@ -163,7 +167,7 @@ export default {
         this.Ideas = UpdatedIdeas
       }, 0.1)
     },
-    SortByDate () {
+    SortByDate() {
       this.Ideas = []
 
       this.GetIdeas()
@@ -175,7 +179,7 @@ export default {
     }
 
   },
-  created () {
+  created() {
     this.GetIdeas()
   }
 }
