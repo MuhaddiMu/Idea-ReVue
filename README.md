@@ -1,5 +1,5 @@
   <h1 align="center">Idea Re-Vue  💡</h1> 
-  <p align="center">Social ideation platform that helps you brainstorm Ideas. Create, edit, collaborate & share ideas in a fun, visual way 🥳
+  <p align="center">Social ideation platform that helps you brainstorm Ideas. Create, edit, collaborate & share ideas in a fun, visual way 🥳 See Public Ideas and help people achieve them before the deadline. 
   <br> 
   <a href="#"><strong>TRY IT FREE 🤩</strong></a></p>
   <br><br>
