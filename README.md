@@ -47,7 +47,7 @@ Pull requests and potential features are welcome.
 
 Feel free to come up with your intuition and update Todo list or let me welcome your PR 🎉
 
-## Submit Issues
+## Submit Issues 🐛
 Facing any Issues or weird behaviour(yes, apps behave)? Feel free to Open a [new issue](https://github.com/MuhaddiMu/Idea-ReVue/issues/new) and I will ideate on it where I went wrong.
 
 ## About Author 😎
