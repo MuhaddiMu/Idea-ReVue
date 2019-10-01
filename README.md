@@ -13,8 +13,8 @@
  - Vuetify (Material Design Vue Framework)
  
 ## Setup on Local Environment 💻
-Clone the repository `https://github.com/MuhaddiMu/Idea-ReVue.git`
-Install node modules `npm install` or `yarn install`
+Clone the repository `https://github.com/MuhaddiMu/Idea-ReVue.git`<br />
+Install node modules `npm install` or `yarn install`<br />
 Serve `npm run serve`
 
 ## I want to  Contribute 🙏
