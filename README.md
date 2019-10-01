@@ -18,7 +18,7 @@ Install node modules `npm install` or `yarn install`<br />
 Serve `npm run serve`
 
 ## I want to  Contribute 🙏
-(Glad to Pull Request Flooded 🤓)
+(Glad to Pull Request Flooded 🤓)<br />
 Pull requests and potential features are welcome.
 
  1. Make all changes on the `develop` branch.
