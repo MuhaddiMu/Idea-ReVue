@@ -18,7 +18,7 @@ Install node modules `npm install` or `yarn install`<br />
 Serve `npm run serve`
 
 ## I want to  Contribute 🙏
-(Glad to Pull Request Flooded 🤓)<br />
+(Glad to see Pull Request Flooded 🤓)<br />
 Pull requests and potential features are welcome.
 
  1. Make all changes on the `develop` branch.
@@ -47,9 +47,10 @@ Pull requests and potential features are welcome.
 Feel free to come up with your intuition and update Todo list or let me welcome your PR 🎉
 
 ## About Author 😎
-Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favourite instruments and make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey to #365DaysOfCode
-Feel free to say 👋 on Twitter [@MuhaddiMu](https://twitter.com/MuhaddiMu) and don't forget to land on Muhaddis.Info
+Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favourite instruments and make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey #365DaysOfCode <br />
+Feel free to say 👋 on Twitter [@MuhaddiMu](https://twitter.com/MuhaddiMu) and don't forget to land on [Muhaddis.Info](http://www.Muhaddis.Info) <br />
 Interested more about me? [Read 50  Random Facts About Me 😅](https://www.muhaddis.info/50-random-facts-about-me/)
+
 ## License
 [MIT](http://opensource.org/licenses/MIT)
 Copyright &copy; 2019, Muhammad Muhaddis. All rights reserved.
