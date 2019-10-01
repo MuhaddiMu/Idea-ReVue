@@ -3,6 +3,9 @@
   <br> 
   <a href="https://muhaddimu.github.io/Idea-ReVue/"><strong>TRY IT FREE 🤩</strong></a></p>
   <br><br>
+  
+## Inspiration 😍
+> When you write down 10 ideas a day like James Altucher recommends, you will have thousands of ways you can make money and improve your life by the end of the year. Even if 90% of your ideas are total crap, you’ll still have 365 high quality and actionable ideas that can change your life.
 
 ## Technology Stack 👓
 **Backend**
