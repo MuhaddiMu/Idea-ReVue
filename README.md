@@ -35,19 +35,23 @@ Pull requests and potential features are welcome.
  - [ ] Idea Search
  - [ ] Single Idea Sharable Link
  - [ ] Idea Collaboration
+ - [ ] Reactive Page Title
  - [ ] Idea Love Count
  - [ ] Idea board comments
  - [ ] Idea Board Prioritization
  - [ ] Customize Dashboard
  - [ ] Server Side Rendering with Nuxt.Js
- - [ ] Mailing
+ - [ ] Mailingbehave
  - [ ] Notifications
  - [ ] PWA Support
 
 Feel free to come up with your intuition and update Todo list or let me welcome your PR 🎉
 
+## Submit Issues
+Facing any Issues or weird behaviour(yes, apps behave)? Feel free to Open a [new issue](https://github.com/MuhaddiMu/Idea-ReVue/issues/new) and I will ideate on it where I went wrong.
+
 ## About Author 😎
-Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favourite instruments and make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey #365DaysOfCode <br />
+Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favourite weapons and make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey #365DaysOfCode <br />
 Feel free to say 👋 on Twitter [@MuhaddiMu](https://twitter.com/MuhaddiMu) and don't forget to land on [Muhaddis.Info](http://www.Muhaddis.Info) <br />
 Interested more about me? [Read 50  Random Facts About Me 😅](https://www.muhaddis.info/50-random-facts-about-me/)
 
