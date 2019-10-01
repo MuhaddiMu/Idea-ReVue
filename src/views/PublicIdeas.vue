@@ -168,15 +168,19 @@ export default {
       }, 0.1)
     },
     SortByDate() {
-      this.Ideas = []
 
-      this.GetIdeas()
       let UpdatedIdeas = this.Ideas.sort((A, B) => {
         var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         return D - C
       })
-    }
+
+      this.Ideas = []
+
+      setTimeout(() => {
+        this.Ideas = UpdatedIdeas
+      }, 0.1)
+    },
 
   },
   created() {

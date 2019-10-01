@@ -143,7 +143,7 @@ export default {
     EditIdea
   },
 
-  data () {
+  data() {
     return {
       Ideas: null,
       Loading: false,
@@ -158,7 +158,7 @@ export default {
     }
   },
   methods: {
-    GetIdeas () {
+    GetIdeas() {
       let self = this
       self.Loading = true
       firebase.firebase
@@ -180,7 +180,7 @@ export default {
           console.log('Error getting documents: ', error)
         })
     },
-    SortByComp () {
+    SortByComp() {
       let UpdatedIdeas = this.Ideas.sort((a, b) => {
         if (a.Completed > b.Completed) {
           return -1
@@ -193,18 +193,22 @@ export default {
         this.Ideas = UpdatedIdeas
       }, 0.1)
     },
-    SortByDate () {
-      this.Ideas = []
+    SortByDate() {
 
-      this.GetIdeas()
       let UpdatedIdeas = this.Ideas.sort((A, B) => {
         var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         return D - C
       })
+
+      this.Ideas = []
+
+      setTimeout(() => {
+        this.Ideas = UpdatedIdeas
+      }, 0.1)
     },
 
-    TriggerClick (FuncName, IdeaID) {
+    TriggerClick(FuncName, IdeaID) {
       if (FuncName === 'Edit') {
         this.Edit(IdeaID)
       }
@@ -218,15 +222,15 @@ export default {
       }
     },
 
-    Edit (IdeaID) {
+    Edit(IdeaID) {
       this.$refs.Idea.ShowModal(IdeaID)
     },
 
-    Delete (IdeaID) {
+    Delete(IdeaID) {
       this.$refs.DeleteIdea.ShowModal(IdeaID)
     },
 
-    ConfirmDelete (IdeaID) {
+    ConfirmDelete(IdeaID) {
       let self = this
       firebase.firebase.firestore().collection('Ideas').doc(IdeaID).delete().then(function () {
         self.Snackbar = true
@@ -237,7 +241,7 @@ export default {
       })
     },
 
-    MarkDone (IdeaID) {
+    MarkDone(IdeaID) {
       let self = this
 
       var MarkAsDone = firebase.firebase.firestore().collection('Ideas').doc(IdeaID)
@@ -251,7 +255,7 @@ export default {
       })
     }
   },
-  created () {
+  created() {
     this.GetIdeas()
   }
 }
