@@ -1,7 +1,6 @@
 // vue.config.js
 
 module.exports = {
-  publicPath: '/Idea-ReVue/',
   css: {
     loaderOptions: {
       sass: {
