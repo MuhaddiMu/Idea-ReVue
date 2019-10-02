@@ -60,4 +60,4 @@ Interested more about me? [Read 50  Random Facts About Me 😅](https://www.muha
 
 ## License
 [MIT](http://opensource.org/licenses/MIT)
-Copyright &copy; 2019, Muhammad Muhaddis. All rights reserved.
+Copyright &copy; 2019, [Muhammad Muhaddis](https://www.Muhaddis.Info). All rights reserved.
