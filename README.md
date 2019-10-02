@@ -5,13 +5,13 @@
   <br><br>
   
 ## Inspiration 😍
-> When you write down 10 ideas a day like James Altucher recommends, you will have thousands of ways you can make money and improve your life by the end of the year. Even if 90% of your ideas are total crap, you’ll still have 365 high quality and actionable ideas that can change your life.
+> When you write down 10 ideas a day as James Altucher recommends, you will have thousands of ways you can make money and improve your life by the end of the year. Even if 90% of your ideas are total crap, you’ll still have 365 high quality and actionable ideas that can change your life.
 
 ## Technology Stack 👓
 **Backend**
  - Firebase
 
-**Frontent**
+**Frontend**
  - Vue.Js
  - Vuetify (Material Design Vue Framework)
  
@@ -24,7 +24,7 @@ Serve `npm run serve`
 (Glad to see Pull Request Flooded 🤓)<br />
 Pull requests and potential features are welcome.
 
- 1. Make all changes on the `develop` branch.
+ 1. Make all changes to the `develop` branch.
  2. Update this README if necessary.
  3. Submit a Pull Request and make sure to reference the issue.
 
@@ -51,10 +51,10 @@ Pull requests and potential features are welcome.
 Feel free to come up with your intuition and update Todo list or let me welcome your PR 🎉
 
 ## Submit Issues 🐛
-Facing any Issues or weird behaviour(yes, apps behave)? Feel free to Open a [new issue](https://github.com/MuhaddiMu/Idea-ReVue/issues/new) and I will ideate on it where I went wrong.
+Facing any Issues or weird behavior(yes, apps behave)? Feel free to open a [new issue](https://github.com/MuhaddiMu/Idea-ReVue/issues/new) and I will ideate on it where I went wrong.
 
-## About Author 😎
-Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favourite weapons. Make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey to #365DaysOfCode <br />
+## About The Author 😎
+Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favorite weapons. Make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey to #365DaysOfCode <br />
 Feel free to say 👋 on Twitter [@MuhaddiMu](https://twitter.com/MuhaddiMu) and don't forget to land on [Muhaddis.Info](http://www.Muhaddis.Info) <br />
 Interested more about me? [Read 50  Random Facts About Me 😅](https://www.muhaddis.info/50-random-facts-about-me/)
 
