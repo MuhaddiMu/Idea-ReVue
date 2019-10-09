@@ -24,7 +24,7 @@
 (Glad to see Pull Request Flooded 🤓)<br />
 Pull requests and potential features are welcome.
 
- 1. Make all changes to the `develop` branch.
+ 1. Make all changes to your forked branch.
  2. Update this README if necessary.
  3. Submit a Pull Request and make sure to reference the issue.
 
