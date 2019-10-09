@@ -54,9 +54,9 @@ Feel free to come up with your intuition and update Todo list or let me welcome 
 Facing any Issues or weird behavior(yes, apps behave)? Feel free to open a [new issue](https://github.com/MuhaddiMu/Idea-ReVue/issues/new) and I will ideate on it where I went wrong.
 
 ## About The Author 😎
-- Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favorite weapons. Make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey to #365DaysOfCode <br />
-- Feel free to say 👋 on Twitter [@MuhaddiMu](https://twitter.com/MuhaddiMu) and don't forget to land on [Muhaddis.Info](http://www.Muhaddis.Info) <br />
-- Interested more about me? [Read 50  Random Facts About Me 😅](https://www.muhaddis.info/50-random-facts-about-me/)
+Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favorite weapons. Make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey to #365DaysOfCode <br />
+Feel free to say 👋 on Twitter [@MuhaddiMu](https://twitter.com/MuhaddiMu) and don't forget to land on [Muhaddis.Info](http://www.Muhaddis.Info) <br />
+Interested more about me? [Read 50  Random Facts About Me 😅](https://www.muhaddis.info/50-random-facts-about-me/)
 
 ## License
 [MIT](http://opensource.org/licenses/MIT)
