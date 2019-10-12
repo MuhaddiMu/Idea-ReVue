@@ -15,6 +15,15 @@
         "code",
         "business"
       ]
+    },
+    {
+      "login": "DiegoPette",
+      "name": "DiegoPette",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/31654084?v=4",
+      "profile": "https://github.com/DiegoPette",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
