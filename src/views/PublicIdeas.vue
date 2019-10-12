@@ -41,7 +41,7 @@
             <v-icon>search</v-icon>
           </v-btn>
         </template>
-        <span>Refresh</span>
+        <span>Search</span>
       </v-tooltip>
     </v-flex>
 
