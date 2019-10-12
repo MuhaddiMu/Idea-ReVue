@@ -1,5 +1,4 @@
   <h1 align="center">Idea Re-Vue  💡</h1> 
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
   <p align="center">Social ideation platform that helps you brainstorm Ideas. Create, edit, collaborate & share ideas in a fun, visual way 🥳
   <br> 
   <a href="https://muhaddimu.github.io/Idea-ReVue/"><strong>TRY IT FREE 🤩</strong></a></p>
