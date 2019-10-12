@@ -1,10 +1,15 @@
 <template>
   <v-container grid-list-md>
     <vue-headful title="Public Ideas | Idea Re-Vue" />
-
+    <v-flex row class="search align-center justify-center">
+        <div :class="{'show' : search}" >
+            <input class="searchBar" v-model="searchTerm" type="text" />
+            <v-icon>search</v-icon>
+        </div>
+    </v-flex>
     <v-flex row class="item align-center justify-center">
       <v-tooltip bottom>
-        <template v-if="Ideas" v-slot:activator="{ on }">
+        <template v-if="allIdeas" v-slot:activator="{ on }">
           <v-btn @click="SortByComp" small v-on="on" fab depressed>
             <v-icon>filter_list</v-icon>
           </v-btn>
@@ -14,14 +19,14 @@
 
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-btn v-if="Ideas" @click="SortByDate" small v-on="on" fab depressed>
+          <v-btn v-if="allIdeas" @click="SortByDate" small v-on="on" fab depressed>
             <v-icon>calendar_today</v-icon>
           </v-btn>
         </template>
         <span>Sort by Date</span>
       </v-tooltip>
 
-      <v-tooltip v-if="Ideas" bottom>
+      <v-tooltip v-if="allIdeas" bottom>
         <template v-slot:activator="{ on }">
           <v-btn :loading="Loading" @click="GetIdeas" small v-on="on" fab depressed>
             <v-icon>refresh</v-icon>
@@ -29,9 +34,18 @@
         </template>
         <span>Refresh</span>
       </v-tooltip>
+
+      <v-tooltip v-if="allIdeas" bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn @click="toggleSearch" small v-on="on" fab depressed>
+            <v-icon>search</v-icon>
+          </v-btn>
+        </template>
+        <span>Search</span>
+      </v-tooltip>
     </v-flex>
 
-    <v-layout v-if="!Ideas" class="align-center justify-center" justify-center row align-center>
+    <v-layout v-if="!allIdeas" class="align-center justify-center" justify-center row align-center>
       <v-flex
         align="center"
         justify="center"
@@ -71,7 +85,7 @@
         justify="center"
         class="item align-center justify-center"
         v-masonry-tile
-        v-for="Idea in Ideas"
+        v-for="Idea in filteredIdeas"
         :key="Idea.DocID"
         xs12
         md3
@@ -115,9 +129,21 @@ export default {
 
   data() {
     return {
-      Ideas: null,
-      Loading: false
+      allIdeas: null,
+      filteredIdeas: null,
+      Loading: false,
+      search: false,
+      searchTerm: "",
     }
+  },
+  watch:{
+      searchTerm(to,from){
+          setTimeout(() => {
+              if(this.searchTerm == to){
+                  this.searchIdea(to);
+              }
+          }, 500,to);
+      }
   },
   methods: {
     GetIdeas() {
@@ -130,9 +156,7 @@ export default {
         .get()
         .then(function (querySnapshot) {
 
-
           var IdeasWithUsersName = []
-
 
           querySnapshot.forEach(function (doc) {
             var DocData = doc.data()
@@ -144,7 +168,8 @@ export default {
             User.get().then(UserDetails => {
               DocData.UserName = UserDetails.data().Name
               IdeasWithUsersName.push(DocData)
-              self.Ideas = IdeasWithUsersName
+              self.allIdeas = IdeasWithUsersName
+              self.filteredIdeas = self.allIdeas
             })
           })
           self.Loading = false
@@ -153,35 +178,47 @@ export default {
           console.log('Error getting documents: ', error)
         })
     },
-
     SortByComp() {
-      let UpdatedIdeas = this.Ideas.sort((a, b) => {
+      let UpdatedIdeas = this.filteredIdeas.sort((a, b) => {
         if (a.Completed > b.Completed) {
           return -1
         }
       })
 
-      this.Ideas = []
+      this.filteredIdeas = []
 
       setTimeout(() => {
-        this.Ideas = UpdatedIdeas
+        this.filteredIdeas = UpdatedIdeas
       }, 0.1)
     },
     SortByDate() {
 
-      let UpdatedIdeas = this.Ideas.sort((A, B) => {
+      let UpdatedIdeas = this.filteredIdeas.sort((A, B) => {
         var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         return D - C
       })
 
-      this.Ideas = []
+      this.filteredIdeas = []
 
       setTimeout(() => {
-        this.Ideas = UpdatedIdeas
+        this.filteredIdeas = UpdatedIdeas
       }, 0.1)
     },
-
+    toggleSearch(){
+        if(this.search)
+            this.search = false;
+        else 
+            this.search = true;
+    },
+    searchIdea(term){
+        let tmpArr = [];
+        this.allIdeas.forEach(element => {
+            if(element.Title.includes(term) || element.Description.includes(term) || element.UserName.includes(term))
+                tmpArr.push(element);
+        });
+        this.filteredIdeas = tmpArr;
+    }
   },
   created() {
     this.GetIdeas()
@@ -189,8 +226,50 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 v-card {
   color: aqua;
 }
+
+.item{
+    margin-bottom: 30px;
+}
+
+
+.search{
+    div{
+        margin:10px 0;
+        opacity: 0;
+        pointer-events: none;
+        min-height: 0;
+        max-height: 0;
+        width: 50%;
+        min-width: 300px;
+        box-sizing: border-box;
+        padding: 10px 30px;
+        padding-right: 60px;
+        background-color: #f9f9f9;
+        border: 1px solid rgba($color: #f0f0f0, $alpha: .5);
+        box-shadow: 0px 0px 8px 2px rgba($color: #000, $alpha: .2);
+        transition: opacity .4s ease-in-out, min-height .4s ease-in-out;
+        position: relative;
+        &.show{
+            opacity: 1;
+            pointer-events: all;
+            min-height: 60px;
+            max-height: 0;
+        }
+        input{
+            width: 100%;
+            line-height: 40px;
+        }
+        i{
+            position: absolute;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+        }
+    }
+}
+
 </style>
