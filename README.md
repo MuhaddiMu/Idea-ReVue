@@ -36,7 +36,7 @@ Pull requests and potential features are welcome.
  - [x] Love Count
  - [x] Update Account
  - [x] Edit, Delete Personal Ideas
- - [ ] Idea Search
+ - [x] Idea Search
  - [ ] Single Idea Sharable Link
  - [ ] Idea Collaboration
  - [ ] Reactive Page Title
