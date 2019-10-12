@@ -1,4 +1,5 @@
   <h1 align="center">Idea Re-Vue  💡</h1> 
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
   <p align="center">Social ideation platform that helps you brainstorm Ideas. Create, edit, collaborate & share ideas in a fun, visual way 🥳
   <br> 
   <a href="https://muhaddimu.github.io/Idea-ReVue/"><strong>TRY IT FREE 🤩</strong></a></p>
@@ -61,3 +62,19 @@ Interested more about me? [Read 50  Random Facts About Me 😅](https://www.muha
 ## License
 [MIT](http://opensource.org/licenses/MIT)
 Copyright &copy; 2019, [Muhammad Muhaddis](https://www.Muhaddis.Info). All rights reserved.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="http://Http://www.Muhaddis.Info"><img src="https://avatars3.githubusercontent.com/u/26611847?v=4" width="100px;" alt="Muhammad Muhaddis"/><br /><sub><b>Muhammad Muhaddis</b></sub></a><br /><a href="#infra-MuhaddiMu" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/MuhaddiMu/Idea-ReVue/commits?author=MuhaddiMu" title="Code">💻</a> <a href="#business-MuhaddiMu" title="Business development">💼</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
