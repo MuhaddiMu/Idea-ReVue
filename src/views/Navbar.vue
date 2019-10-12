@@ -13,22 +13,22 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-tooltip left>
+      <v-toolbar-items>
+        <v-tooltip left class="d-none d-sm-flex">
           <template v-slot:activator="{ on }">
-            <v-btn @click="LoveUpdate" v-on="on" fab text>
+            <v-btn @click="LoveUpdate" v-on="on" fab text class="d-none d-sm-flex">
               <v-icon large color="pink">favorite</v-icon>
             </v-btn>
           </template>
           <span>Show Love By Tapping</span>
         </v-tooltip>
-        <v-btn :ripple="false" class="TotalCount" font-weight-bold text>
+        <v-btn :ripple="false" class="TotalCount d-none d-sm-flex" font-weight-bold text>
           <kbd class="body-2">
             <b>{{LoveCount}}</b>
             <v-icon small>favorite</v-icon>
           </kbd>
         </v-btn>
-        <v-btn @click="LogOut" fab text>
+        <v-btn @click="LogOut" fab text class="d-sm-block">
           <v-icon>exit_to_app</v-icon>
         </v-btn>
       </v-toolbar-items>
