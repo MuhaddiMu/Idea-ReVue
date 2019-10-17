@@ -18,7 +18,7 @@
 ## Setup on Local Environment 💻
 - Clone the repository `git clone https://github.com/MuhaddiMu/Idea-ReVue.git`<br />
 - Install node modules `npm install` or `yarn install`<br />
-- Serve `npm run serve`
+- Serve `npm run serve` or `yarn serve`
 
 ## I want to  Contribute 🙏
 (Glad to see Pull Request Flooded 🤓)<br />
