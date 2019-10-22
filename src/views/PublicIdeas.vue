@@ -91,8 +91,7 @@
         md3
       >
         <v-card hover width="320" class="mx-auto">
-          <v-card-Title class="title">
-            {{ Idea.Title }}
+          <v-card-title>
             <v-spacer></v-spacer>
             <v-tooltip right>
               <template v-slot:activator="{ on }">
@@ -101,7 +100,17 @@
               </template>
               <span>{{ Idea.Completed ? "Completed" : "Pending" }}</span>
             </v-tooltip>
-          </v-card-Title>
+            <v-icon
+              small right
+              :color="checkFavorite(Idea.DocID) ? 'red' : 'grey lighten-3'"
+              @click="setFavorite(Idea)"
+            >
+              favorite
+            </v-icon>
+          </v-card-title>
+          <v-card-title class="title">
+            {{ Idea.Title }}
+          </v-card-title>
           <v-card-text>
             <div class="grey--text text--darken-3 mb-1 subtitle-1">By {{Idea.UserName}}</div>
             {{ Idea.Description }}
@@ -126,7 +135,6 @@ export default {
   components: {
     VueContentLoading
   },
-
   data() {
     return {
       allIdeas: null,
@@ -146,6 +154,14 @@ export default {
       }
   },
   methods: {
+    checkFavorite(id){
+      if (this.getFavorites.includes(id)){
+        return true
+      }
+      else {
+        return false
+      }
+    },
     GetIdeas() {
       let self = this
       self.Loading = true
@@ -178,6 +194,10 @@ export default {
           console.log('Error getting documents: ', error)
         })
     },
+    setFavorite(idea){
+      this.$store.dispatch('setFavorite', idea.DocID)
+      this.GetIdeas()
+    },
     SortByComp() {
       let UpdatedIdeas = this.filteredIdeas.sort((a, b) => {
         if (a.Completed > b.Completed) {
@@ -192,7 +212,6 @@ export default {
       }, 0.1)
     },
     SortByDate() {
-
       let UpdatedIdeas = this.filteredIdeas.sort((A, B) => {
         var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
@@ -208,7 +227,7 @@ export default {
     toggleSearch(){
         if(this.search)
             this.search = false;
-        else 
+        else
             this.search = true;
     },
     searchIdea(term){
@@ -222,6 +241,11 @@ export default {
   },
   created() {
     this.GetIdeas()
+  },
+  computed: {
+    getFavorites(){
+      return this.$store.getters.getFavorites
+    }
   }
 }
 </script>
