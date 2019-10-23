@@ -91,26 +91,27 @@
         md3
       >
         <v-card hover width="320" class="mx-auto">
-          <v-card-title>
-            <v-spacer></v-spacer>
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-icon v-on="on" v-if="Idea.Completed" class="green--text" small>done_all</v-icon>
-                <v-icon v-on="on" v-else class="orange--text text--lighten-2" small>update</v-icon>
-              </template>
-              <span>{{ Idea.Completed ? "Completed" : "Pending" }}</span>
-            </v-tooltip>
-            <v-icon
-              small right
-              :color="checkFavorite(Idea.DocID) ? 'red' : 'grey lighten-3'"
-              @click="setFavorite(Idea)"
-            >
-              favorite
-            </v-icon>
-          </v-card-title>
-          <v-card-title class="title">
-            {{ Idea.Title }}
-          </v-card-title>
+          <v-row no-gutters align="center" class="grey lighten-3">
+            <v-col cols="8" class="title ml-1">
+              {{ Idea.Title }}
+            </v-col>
+            <v-col cols="3" class="text-right">
+              <v-tooltip top>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on" v-if="Idea.Completed" class="green--text" small>done_all</v-icon>
+                  <v-icon v-on="on" v-else class="orange--text text--lighten-2" small>update</v-icon>
+                </template>
+                <span>{{ Idea.Completed ? "Completed" : "Pending" }}</span>
+              </v-tooltip>
+              <v-tooltip top>
+                <template v-slot:activator="{ on }">
+                  <v-icon v-on="on" small right :color="checkFavorite(Idea.DocID) ? 'red' : 'grey lighten-1'" @click="setFavorite(Idea)">favorite</v-icon>
+                </template>
+                <span>Add to your favorites</span>
+              </v-tooltip>
+            </v-col>
+          </v-row>
+          <!-- <v-divider class="ml-1 mr-1"></v-divider> -->
           <v-card-text>
             <div class="grey--text text--darken-3 mb-1 subtitle-1">By {{Idea.UserName}}</div>
             {{ Idea.Description }}
