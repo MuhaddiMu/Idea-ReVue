@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Loading></Loading>
     <Navbar v-if="ShowNavbar"></Navbar>
     <v-content class="mx-4 mb-4" grey lighten-4>
       <keep-alive>
@@ -10,12 +11,14 @@
 </template>
 
 <script>
+import Loading from './views/Loading'
 import Navbar from './views/Navbar'
 import WebFontLoader from 'webfontloader'
 
 export default {
   name: 'App',
   components: {
+    Loading,
     Navbar
   },
   data () {

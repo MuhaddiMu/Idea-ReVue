@@ -8,12 +8,16 @@ export default new Vuex.Store({
   state: {
     user: null,
     Favorites: [],
+    loading   : false,
     LoveCount: null,
     UserName: null,
     UserEmail: null
   },
 
   getters: {
+    getLoading(state){
+      return state.loading
+    },
     getUser: state => {
       return state.user
     },
@@ -51,6 +55,9 @@ export default new Vuex.Store({
       })
       .then(() => console.log("Success!"))
       .catch(() => console.log("Error :("))
+    },
+    setLoading(state, payload){
+      state.loading = payload
     },
     SetLoveCount: state => {
       var LoveCount = firebase.firebase
@@ -128,6 +135,9 @@ export default new Vuex.Store({
     },
     setFavorite({commit}, payload){
       commit('setFavorite', payload)
+    },
+    setLoading({commit}, payload){
+      commit('setLoading', payload)
     },
     SetLoveCount: context => {
       context.commit('SetLoveCount')

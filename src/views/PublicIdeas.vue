@@ -163,18 +163,17 @@ export default {
       }
     },
     GetIdeas() {
-      let self = this
-      self.Loading = true
+      this.$store.dispatch('setLoading', true)
       firebase.firebase
         .firestore()
         .collection('Ideas')
         .where('Visibility', '==', 'Public')
         .get()
-        .then(function (querySnapshot) {
+        .then(querySnapshot => {
 
           var IdeasWithUsersName = []
 
-          querySnapshot.forEach(function (doc) {
+          querySnapshot.forEach(doc =>  {
             var DocData = doc.data()
             DocData.DocID = doc.id
 
@@ -184,13 +183,14 @@ export default {
             User.get().then(UserDetails => {
               DocData.UserName = UserDetails.data().Name
               IdeasWithUsersName.push(DocData)
-              self.allIdeas = IdeasWithUsersName
-              self.filteredIdeas = self.allIdeas
+              this.allIdeas = IdeasWithUsersName
+              this.filteredIdeas = this.allIdeas
             })
           })
-          self.Loading = false
+          this.$store.dispatch('setLoading', false)
         })
-        .catch(function (error) {
+        .catch(error => {
+          this.$store.dispatch('setLoading', false)
           console.log('Error getting documents: ', error)
         })
     },
