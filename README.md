@@ -36,6 +36,8 @@ Pull requests and potential features are welcome.
  - [x] Update Account
  - [x] Edit, Delete Personal Ideas
  - [x] Idea Search
+ - [x] Mark Favourite Idea
+ - [ ] Report Public Idea
  - [ ] Single Idea Sharable Link
  - [ ] Idea Collaboration
  - [ ] Reactive Page Title
@@ -44,7 +46,7 @@ Pull requests and potential features are welcome.
  - [ ] Idea Board Prioritization
  - [ ] Customize Dashboard
  - [ ] Server Side Rendering with Nuxt.Js
- - [ ] Mailingbehave
+ - [ ] Mailing
  - [ ] Notifications
  - [ ] PWA Support
 
