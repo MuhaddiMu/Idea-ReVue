@@ -33,6 +33,16 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "markrmessmore",
+      "name": "Mark",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/25889617?v=4",
+      "profile": "https://MarkMessmore.us",
+      "contributions": [
+        "code",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
