@@ -61,6 +61,7 @@ Facing any Issues or weird behavior(yes, apps behave)? Feel free to open a [new 
     <td align="center"><a href="http://Http://www.Muhaddis.Info"><img src="https://avatars3.githubusercontent.com/u/26611847?v=4" width="100px;" alt="Muhammad Muhaddis"/><br /><sub><b>Muhammad Muhaddis</b></sub></a><br /><a href="#infra-MuhaddiMu" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/MuhaddiMu/Idea-ReVue/commits?author=MuhaddiMu" title="Code">💻</a> <a href="#business-MuhaddiMu" title="Business development">💼</a></td>
     <td align="center"><a href="https://github.com/DiegoPette"><img src="https://avatars3.githubusercontent.com/u/31654084?v=4" width="100px;" alt="DiegoPette"/><br /><sub><b>DiegoPette</b></sub></a><br /><a href="https://github.com/MuhaddiMu/Idea-ReVue/commits?author=DiegoPette" title="Code">💻</a></td>
     <td align="center"><a href="https://umarfarouq.website"><img src="https://avatars3.githubusercontent.com/u/24873093?v=4" width="100px;" alt="Umar Farouq Mohammed"/><br /><sub><b>Umar Farouq Mohammed</b></sub></a><br /><a href="#design-humarh-dharnarh" title="Design">🎨</a></td>
+    <td align="center"><a href="https://MarkMessmore.us"><img src="https://avatars1.githubusercontent.com/u/25889617?v=4" width="100px;" alt="Mark"/><br /><sub><b>Mark</b></sub></a><br /><a href="https://github.com/MuhaddiMu/Idea-ReVue/commits?author=markrmessmore" title="Code">💻</a> <a href="#design-markrmessmore" title="Design">🎨</a></td>
   </tr>
 </table>
 
