@@ -7,16 +7,23 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: null,
+    Favorites: [],
+    loading   : false,
     LoveCount: null,
     UserName: null,
     UserEmail: null
   },
 
   getters: {
+    getLoading(state){
+      return state.loading
+    },
     getUser: state => {
       return state.user
     },
-
+    getFavorites: state => {
+      return state.Favorites
+    },
     GetLoveCount: state => {
       return state.LoveCount
     },
@@ -34,7 +41,24 @@ export default new Vuex.Store({
     setUser: state => {
       state.user = firebase.firebase.auth().currentUser
     },
-
+    setFavorite(state, payload) {
+      let favs = state.Favorites
+      if (favs.includes(payload)){
+        let itemToRemove = favs.indexOf(payload)
+        favs.splice(itemToRemove)
+      }
+      else {
+        favs.push(payload)
+      }
+      firebase.firebase.firestore().collection('Users').doc(state.user.uid).update({
+        Favorites: favs
+      })
+      .then(() => console.log("Success!"))
+      .catch(() => console.log("Error :("))
+    },
+    setLoading(state, payload){
+      state.loading = payload
+    },
     SetLoveCount: state => {
       var LoveCount = firebase.firebase
         .firestore()
@@ -73,6 +97,10 @@ export default new Vuex.Store({
       docRef.get().then(function (doc) {
         if (doc.exists) {
           state.UserName = doc.data().Name
+          //ADDING THE USER'S FAVORITES WHILE WE'RE HERE
+          if (doc.data().Favorites){
+            state.Favorites = doc.data().Favorites
+          }
         } else {
           console.log('No User Name')
         }
@@ -105,7 +133,12 @@ export default new Vuex.Store({
     setUser: context => {
       context.commit('setUser')
     },
-
+    setFavorite({commit}, payload){
+      commit('setFavorite', payload)
+    },
+    setLoading({commit}, payload){
+      commit('setLoading', payload)
+    },
     SetLoveCount: context => {
       context.commit('SetLoveCount')
     },
