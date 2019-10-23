@@ -43,6 +43,15 @@
         </template>
         <span>Search</span>
       </v-tooltip>
+
+      <v-tooltip bottom>
+        <template v-if="allIdeas" v-slot:activator="{ on }">
+          <v-btn @click="showFavorites" small v-on="on" fab depressed>
+            <v-icon :color="favorites ? 'red' : 'grey'">favorite</v-icon>
+          </v-btn>
+        </template>
+        <span>Show Favorites</span>
+      </v-tooltip>
     </v-flex>
 
     <v-layout v-if="!allIdeas" class="align-center justify-center" justify-center row align-center>
@@ -139,6 +148,7 @@ export default {
   data() {
     return {
       allIdeas: null,
+      favorites: false,
       filteredIdeas: null,
       Loading: false,
       search: false,
@@ -164,6 +174,7 @@ export default {
       }
     },
     GetIdeas() {
+      this.favorites = false
       this.$store.dispatch('setLoading', true)
       firebase.firebase
         .firestore()
@@ -198,6 +209,17 @@ export default {
     setFavorite(idea){
       this.$store.dispatch('setFavorite', idea.DocID)
       this.GetIdeas()
+    },
+    showFavorites(){
+      this.favorites = !this.favorites
+      if(this.favorites == true){
+        this.filteredIdeas = this.allIdeas.filter(idea => {
+          return this.getFavorites.includes(idea.DocID)
+        })
+      }
+      else {
+        this.GetIdeas()
+      }
     },
     SortByComp() {
       let UpdatedIdeas = this.filteredIdeas.sort((a, b) => {
