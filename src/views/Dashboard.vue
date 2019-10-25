@@ -14,7 +14,7 @@
           <v-card-title class="display-1">Create New Idea</v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="ShowIdeaModal()" fab depressed text>
+            <v-btn fab depressed text>
               <svg colo viewBox="0 0 24 24" style="width: 24px; height: 24px;">
                 <path
                   fill="#ffffff"
@@ -30,7 +30,7 @@
           <v-card-title class="display-1">See Public Ideas</v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="RedirectPublic()" depressed text fab>
+            <v-btn depressed text fab>
               <v-icon>public</v-icon>
             </v-btn>
           </v-card-actions>
