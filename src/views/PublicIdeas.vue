@@ -226,15 +226,13 @@ export default {
       this.GetIdeas()
     },
     showFavorites(){
-      this.favorites = !this.favorites
-      if(this.favorites == true){
-        this.filteredIdeas = this.allIdeas.filter(idea => {
-          return this.getFavorites.includes(idea.DocID)
-        })
-      }
-      else {
-        this.GetIdeas()
-      }
+      let UpdatedIdeas = this.filteredIdeas.sort((a, b) => b.FavoritesCount.length - a.FavoritesCount.length)
+      
+      this.filteredIdeas = []
+
+      setTimeout(() => {
+        this.filteredIdeas = UpdatedIdeas        
+      }, 0.1)
     },
     SortByComp() {
       let UpdatedIdeas = this.filteredIdeas.sort((a, b) => {
