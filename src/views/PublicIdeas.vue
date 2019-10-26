@@ -114,6 +114,7 @@
               </v-tooltip>
               <v-tooltip top>
                 <template v-slot:activator="{ on }">
+                  <span>{{Idea.FavoritesCount.length === 0 ? '' : Idea.FavoritesCount.length}}</span>
                   <v-icon v-on="on" small right :color="checkFavorite(Idea.DocID) ? 'red' : 'grey lighten-1'" @click="setFavorite(Idea)">favorite</v-icon>
                 </template>
                 <span>Add to your favorites</span>
@@ -188,10 +189,24 @@ export default {
           querySnapshot.forEach(doc =>  {
             var DocData = doc.data()
             DocData.DocID = doc.id
-
+            DocData.FavoritesCount = []
             let UserID = doc.data().AddedBy
 
             const User = firebase.firebase.firestore().collection('Users').doc(UserID)
+            const AllUsers = firebase.firebase.firestore().collection('Users')
+
+            AllUsers.get().then(querySnapshot => {
+              querySnapshot.forEach(doc => {
+                const UserFavoritesArray = doc.data().Favorites
+                if(UserFavoritesArray){
+                  UserFavoritesArray.find(favourite => {
+                    if(favourite.includes(DocData.DocID)) {
+                      DocData.FavoritesCount.push(favourite)
+                    }}
+                    )                  
+                }
+              })
+            })
             User.get().then(UserDetails => {
               DocData.UserName = UserDetails.data().Name
               IdeasWithUsersName.push(DocData)
