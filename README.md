@@ -37,6 +37,7 @@ Pull requests and potential features are welcome.
  - [x] Edit, Delete Personal Ideas
  - [x] Idea Search
  - [x] Mark Favourite Idea
+ - [ ] Idea Favourite Count
  - [ ] Report Public Idea
  - [ ] Single Idea Sharable Link
  - [ ] Idea Collaboration
