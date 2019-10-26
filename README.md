@@ -38,6 +38,7 @@ Pull requests and potential features are welcome.
  - [x] Idea Search
  - [x] Mark Favourite Idea
  - [ ] Idea Favourite Count
+ - [ ] Replace Content Loaders with Vuetify Content Loaders 
  - [ ] Report Public Idea
  - [ ] Single Idea Sharable Link
  - [ ] Idea Collaboration
