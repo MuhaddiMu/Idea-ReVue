@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1 class="text-center display-3 blue--text Title">Idea Re-Vue</h1>
+    <h1 class="text-center display-3 blue--text Title">Idea Re-Vue TEST</h1>
     <v-snackbar v-model="Snackbar" top>
       {{SnackbarMsg}}
       <v-btn color="pink" text @click="Snackbar = false">Close</v-btn>
