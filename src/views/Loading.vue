@@ -24,7 +24,7 @@
 <script>
 export default {
   computed: {
-    getLoading(){
+    getLoading () {
       return this.$store.getters.getLoading
     }
   }

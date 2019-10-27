@@ -100,7 +100,7 @@ import store from '../store'
 import moment from 'moment'
 export default {
 
-  data() {
+  data () {
     return {
       Overflow: false,
       date: '',
@@ -126,12 +126,12 @@ export default {
   },
 
   methods: {
-    ShowModal(IdeaID) {
+    ShowModal (IdeaID) {
       this.Overflow = true
       this.FetchIdea(IdeaID)
     },
 
-    FetchIdea(IdeaID) {
+    FetchIdea (IdeaID) {
       let self = this
       const ID = IdeaID
 
@@ -149,7 +149,7 @@ export default {
       })
     },
 
-    UpdateIdea() {
+    UpdateIdea () {
       let self = this
       if (this.$refs.Form.validate()) {
         this.Loading = true
@@ -177,7 +177,7 @@ export default {
     }
   },
   computed: {
-    computedDateFormattedMomentjs() {
+    computedDateFormattedMomentjs () {
       return this.date ? moment(this.date).format('Do MMMM YYYY') : ''
     }
   }

@@ -93,7 +93,7 @@ import firebase from '../firebase'
 import store from '../store'
 import moment from 'moment'
 export default {
-  data() {
+  data () {
     return {
       date: '',
       DateBox: false,
@@ -116,11 +116,11 @@ export default {
   },
 
   methods: {
-    ShowModal() {
+    ShowModal () {
       this.dialog = true
     },
 
-    SaveIdea() {
+    SaveIdea () {
       let self = this
       if (this.$refs.Form.validate()) {
         this.Loading = true
@@ -150,7 +150,7 @@ export default {
     }
   },
   computed: {
-    computedDateFormattedMomentjs() {
+    computedDateFormattedMomentjs () {
       return this.date ? moment(this.date).format('Do MMMM YYYY') : ''
     }
   }

@@ -146,35 +146,34 @@ export default {
   components: {
     VueContentLoading
   },
-  data() {
+  data () {
     return {
       allIdeas: null,
       favorites: false,
       filteredIdeas: null,
       Loading: false,
       search: false,
-      searchTerm: "",
+      searchTerm: ''
     }
   },
-  watch:{
-      searchTerm(to,from){
-          setTimeout(() => {
-              if(this.searchTerm == to){
-                  this.searchIdea(to);
-              }
-          }, 500,to);
-      }
+  watch: {
+    searchTerm (to, from) {
+      setTimeout(() => {
+        if (this.searchTerm == to) {
+          this.searchIdea(to)
+        }
+      }, 500, to)
+    }
   },
   methods: {
-    checkFavorite(id){
-      if (this.getFavorites.includes(id)){
+    checkFavorite (id) {
+      if (this.getFavorites.includes(id)) {
         return true
-      }
-      else {
+      } else {
         return false
       }
     },
-    GetIdeas() {
+    GetIdeas () {
       this.favorites = false
       this.$store.dispatch('setLoading', true)
       firebase.firebase
@@ -183,10 +182,9 @@ export default {
         .where('Visibility', '==', 'Public')
         .get()
         .then(querySnapshot => {
-
           var IdeasWithUsersName = []
 
-          querySnapshot.forEach(doc =>  {
+          querySnapshot.forEach(doc => {
             var DocData = doc.data()
             DocData.DocID = doc.id
             DocData.FavoritesCount = []
@@ -198,12 +196,13 @@ export default {
             AllUsers.get().then(querySnapshot => {
               querySnapshot.forEach(doc => {
                 const UserFavoritesArray = doc.data().Favorites
-                if(UserFavoritesArray){
+                if (UserFavoritesArray) {
                   UserFavoritesArray.find(favourite => {
-                    if(favourite.includes(DocData.DocID)) {
+                    if (favourite.includes(DocData.DocID)) {
                       DocData.FavoritesCount.push(favourite)
-                    }}
-                    )                  
+                    }
+                  }
+                  )
                 }
               })
             })
@@ -221,20 +220,20 @@ export default {
           console.log('Error getting documents: ', error)
         })
     },
-    setFavorite(idea){
+    setFavorite (idea) {
       this.$store.dispatch('setFavorite', idea.DocID)
       this.GetIdeas()
     },
-    showFavorites(){
+    showFavorites () {
       let UpdatedIdeas = this.filteredIdeas.sort((a, b) => b.FavoritesCount.length - a.FavoritesCount.length)
-      
+
       this.filteredIdeas = []
 
       setTimeout(() => {
-        this.filteredIdeas = UpdatedIdeas        
+        this.filteredIdeas = UpdatedIdeas
       }, 0.1)
     },
-    SortByComp() {
+    SortByComp () {
       let UpdatedIdeas = this.filteredIdeas.sort((a, b) => {
         if (a.Completed > b.Completed) {
           return -1
@@ -247,7 +246,7 @@ export default {
         this.filteredIdeas = UpdatedIdeas
       }, 0.1)
     },
-    SortByDate() {
+    SortByDate () {
       let UpdatedIdeas = this.filteredIdeas.sort((A, B) => {
         var C = new Date(moment(A.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
         var D = new Date(moment(B.Added, 'Do MMMM YYYY').format('YYYY-MM-DD'))
@@ -260,26 +259,22 @@ export default {
         this.filteredIdeas = UpdatedIdeas
       }, 0.1)
     },
-    toggleSearch(){
-        if(this.search)
-            this.search = false;
-        else
-            this.search = true;
+    toggleSearch () {
+      if (this.search) { this.search = false } else { this.search = true }
     },
-    searchIdea(term){
-        let tmpArr = [];
-        this.allIdeas.forEach(element => {
-            if(element.Title.includes(term) || element.Description.includes(term) || element.UserName.includes(term))
-                tmpArr.push(element);
-        });
-        this.filteredIdeas = tmpArr;
+    searchIdea (term) {
+      let tmpArr = []
+      this.allIdeas.forEach(element => {
+        if (element.Title.includes(term) || element.Description.includes(term) || element.UserName.includes(term)) { tmpArr.push(element) }
+      })
+      this.filteredIdeas = tmpArr
     }
   },
-  created() {
+  created () {
     this.GetIdeas()
   },
   computed: {
-    getFavorites(){
+    getFavorites () {
       return this.$store.getters.getFavorites
     }
   }
@@ -294,7 +289,6 @@ v-card {
 .item{
     margin-bottom: 30px;
 }
-
 
 .search{
     div{
