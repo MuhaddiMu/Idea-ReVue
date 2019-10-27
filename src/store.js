@@ -45,7 +45,7 @@ export default new Vuex.Store({
       let favs = state.Favorites
       if (favs.includes(payload)){
         let itemToRemove = favs.indexOf(payload)
-        favs.splice(itemToRemove)
+        favs.splice(itemToRemove, 1)
       }
       else {
         favs.push(payload)
